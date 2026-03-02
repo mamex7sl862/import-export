@@ -55,7 +55,7 @@ export const useSignUpWithEmailMutation = () => {
           });
           navigate("/account");
         },
-        onError: ({ error }) => {
+        onError: ({ error }: { error: any }) => {
           toast("Unsuccessfull", {
             description: error.message,
             position: "top-center",
