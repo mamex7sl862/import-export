@@ -21,7 +21,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative h-full flex items-center pt-8">
+      <div className="relative h-full flex items-center py-4">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <div className="max-w-4xl">
             <motion.div
@@ -30,58 +30,58 @@ export default function HeroSection() {
               transition={{ duration: 1, ease: "easeOut" }}
             >
               {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-8">
-                <span className="text-[#D4AF37] text-sm font-semibold tracking-wide">
+              <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-6">
+                <span className="text-[#D4AF37] text-xs font-semibold tracking-wide">
                   TRUSTED BY 2,000+ GLOBAL ENTERPRISES
                 </span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-8 leading-[0.9] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
                 Global Trade,{" "}
                 <span className="text-[#D4AF37] block">Simplified.</span>
               </h1>
 
               {/* Sub-headline */}
-              <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-12 leading-relaxed max-w-3xl font-light">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-3xl font-light">
                 Expert Import-Export solutions connecting your business to the world's most lucrative markets.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
-                  className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-bold text-lg h-16 px-10 rounded-xl shadow-2xl hover:shadow-[#D4AF37]/25 transition-all duration-300 transform hover:scale-105"
+                  className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-bold text-base h-12 px-8 rounded-xl shadow-2xl hover:shadow-[#D4AF37]/25 transition-all duration-300 transform hover:scale-105"
                   onClick={() => navigate("/contact")}
                 >
                   Request a Quote
-                  <ArrowRight className="ml-3 h-6 w-6" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-transparent hover:bg-white/10 text-white border-2 border-white/30 hover:border-white/50 font-semibold text-lg h-16 px-10 rounded-xl backdrop-blur-sm transition-all duration-300"
+                  className="bg-transparent hover:bg-white/10 text-white border-2 border-white/30 hover:border-white/50 font-semibold text-base h-12 px-8 rounded-xl backdrop-blur-sm transition-all duration-300"
                   onClick={() => navigate("/services")}
                 >
-                  <Play className="mr-3 h-5 w-5" />
+                  <Play className="mr-2 h-4 w-4" />
                   Our Products
                 </Button>
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap items-center gap-8 mt-16 pt-8 border-t border-white/10">
+              <div className="flex flex-wrap items-center gap-6 mt-10 pt-6 border-t border-white/10">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37] mb-1">15+</div>
-                  <div className="text-sm text-white/70 font-medium">Years Experience</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">15+</div>
+                  <div className="text-xs text-white/70 font-medium">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37] mb-1">50+</div>
-                  <div className="text-sm text-white/70 font-medium">Countries Served</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">50+</div>
+                  <div className="text-xs text-white/70 font-medium">Countries Served</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37] mb-1">10K+</div>
-                  <div className="text-sm text-white/70 font-medium">Shipments Delivered</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">10K+</div>
+                  <div className="text-xs text-white/70 font-medium">Shipments Delivered</div>
                 </div>
               </div>
             </motion.div>
