@@ -17,6 +17,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import api_root
+from django.http import JsonResponse
+
+def home_view(request):
+    """Root endpoint"""
+    return JsonResponse({
+        'service': 'TradeFlow API',
+        'status': 'running',
+        'version': '1.0.0',
+        'message': 'Welcome to TradeFlow Import/Export API',
+        'endpoints': {
+            'api': '/api/',
+            'admin': '/admin/',
+            'blog': '/api/blog/posts/',
+            'quotes': '/api/quotes/',
+            'contacts': '/api/contacts/messages/',
+        },
+        'frontend': 'https://tradeflow-import-export.vercel.app',
+        'documentation': 'Visit /api/ for detailed API documentation'
+    })
 
 # Customize admin site
 admin.site.site_header = "TradeFlow Administration"
@@ -24,6 +43,7 @@ admin.site.site_title = "TradeFlow Admin Portal"
 admin.site.index_title = "Welcome to TradeFlow Admin Dashboard"
 
 urlpatterns = [
+    path('', home_view, name='home'),
     path('admin/', admin.site.urls),
     path('api/', api_root, name='api-root'),
     path('api/blog/', include('blog.urls')),
