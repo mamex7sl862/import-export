@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark" style="background-color: #101828;">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
@@ -8,8 +8,16 @@
     <meta name="description" content="TradeFlow - Your trusted partner for international import and export logistics solutions" />
     <meta name="theme-color" content="#101828" />
     <title>TradeFlow - Import & Export Trading Platform</title>
+    <style>
+      /* Prevent white flash on page load */
+      html, body {
+        background-color: #101828;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
-  <body>
+  <body style="background-color: #101828;">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
