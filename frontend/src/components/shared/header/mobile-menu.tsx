@@ -17,7 +17,7 @@ export default function MobileMenu({ navLinks, onClose }: MobileMenuProps) {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="fixed top-[130px] left-0 right-0 bg-background/98 backdrop-blur-lg border-b border-border md:hidden z-40 shadow-lg"
+      className="fixed top-[82px] left-0 right-0 bg-[#101828]/98 backdrop-blur-lg border-b border-slate-700/50 md:hidden z-40 shadow-2xl"
     >
       <div className="container mx-auto px-4 py-6 flex flex-col gap-2">
         {navLinks.map((link) => (
@@ -25,7 +25,7 @@ export default function MobileMenu({ navLinks, onClose }: MobileMenuProps) {
             key={link.label}
             href={link.href}
             onClick={onClose}
-            className="text-base font-semibold text-foreground hover:text-[#D4AF37] hover:bg-muted transition-all py-3 px-4 rounded-lg min-h-[44px] flex items-center"
+            className="text-base font-semibold text-white hover:text-[#D4AF37] hover:bg-slate-800/50 transition-all py-3 px-4 rounded-lg min-h-[44px] flex items-center"
             aria-label={`Navigate to ${link.label}`}
           >
             {link.label}
