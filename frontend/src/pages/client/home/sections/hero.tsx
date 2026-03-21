@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export default function HeroSection() {
   const navigate = useNavigate();
+  const { settings } = useSiteSettings();
 
   const scrollToQuoteForm = () => {
     const quoteSection = document.getElementById('quote-form');
@@ -23,7 +25,6 @@ export default function HeroSection() {
             backgroundImage: `url('https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=2070&auto=format&fit=crop')`,
           }}
         />
-        {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/95 via-[#101828]/85 to-[#101828]/70" />
       </div>
 
@@ -39,19 +40,19 @@ export default function HeroSection() {
               {/* Badge */}
               <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-8">
                 <span className="text-[#D4AF37] text-xs font-semibold tracking-wide">
-                  TRUSTED BY 2,000+ GLOBAL ENTERPRISES
+                  {settings.hero_badge_text}
                 </span>
               </div>
 
               {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
-                Global Trade,{" "}
-                <span className="text-[#D4AF37] block">Simplified.</span>
+                {settings.hero_title}{" "}
+                <span className="text-[#D4AF37] block">{settings.hero_title_highlight}</span>
               </h1>
 
               {/* Sub-headline */}
               <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-10 leading-relaxed max-w-3xl font-light">
-                Expert Import-Export solutions connecting your business to the world's most lucrative markets.
+                {settings.hero_subtitle}
               </p>
 
               {/* CTA Buttons */}
@@ -79,15 +80,15 @@ export default function HeroSection() {
               {/* Trust Indicators */}
               <div className="flex flex-wrap items-center gap-6 mt-12 pt-8 border-t border-white/10">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">15+</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_years}</div>
                   <div className="text-xs text-white/70 font-medium">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">50+</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_countries}</div>
                   <div className="text-xs text-white/70 font-medium">Countries Served</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">10K+</div>
+                  <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_shipments}</div>
                   <div className="text-xs text-white/70 font-medium">Shipments Delivered</div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
-import { Globe, LayoutDashboard, FileText, MessageSquare, ClipboardList, LogOut, Menu, X } from "lucide-react";
+import { Globe, LayoutDashboard, FileText, MessageSquare, ClipboardList, LogOut, Menu, X, Settings } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -9,6 +9,7 @@ const navItems = [
   { label: "Blog Posts", href: "/1/blog", icon: FileText },
   { label: "Contacts", href: "/1/contacts", icon: MessageSquare },
   { label: "Quotes", href: "/1/quotes", icon: ClipboardList },
+  { label: "Site Settings", href: "/1/settings", icon: Settings },
 ];
 
 export default function AdminLayout() {

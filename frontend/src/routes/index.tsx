@@ -15,6 +15,7 @@ import AdminDashboard from "@/pages/admin/dashboard";
 import AdminBlog from "@/pages/admin/blog";
 import AdminContacts from "@/pages/admin/contacts";
 import AdminQuotes from "@/pages/admin/quotes";
+import AdminSiteSettings from "@/pages/admin/site-settings";
 
 // Config for all routes👇🏼
 const Routes = () => {
@@ -41,6 +42,7 @@ const Routes = () => {
         { path: "blog", element: <AdminBlog /> },
         { path: "contacts", element: <AdminContacts /> },
         { path: "quotes", element: <AdminQuotes /> },
+        { path: "settings", element: <AdminSiteSettings /> },
       ],
     },
   ]);

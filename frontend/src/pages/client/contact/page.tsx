@@ -7,12 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageHeader from "./header";
 import { api } from "@/hooks/api";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
+  const { settings } = useSiteSettings();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,14 +69,11 @@ export default function ContactPage() {
                 Send us your inquiry
               </p>
               <a
-                href="mailto:info@globalexports.com"
+                href={`mailto:${settings.contact_email}`}
                 className="text-slate-200 hover:text-[#D4AF37] hover:underline font-medium transition-colors"
               >
-                info@globalexports.com
+                {settings.contact_email}
               </a>
-              <p className="text-xs text-slate-400 mt-2">
-                sales@globalexports.com
-              </p>
             </div>
 
             {/* Phone Card */}
@@ -89,13 +86,13 @@ export default function ContactPage() {
                 Call us directly
               </p>
               <a
-                href="tel:+1234567890"
+                href={`tel:${settings.contact_phone}`}
                 className="text-slate-200 hover:text-[#D4AF37] hover:underline font-medium transition-colors"
               >
-                +2519 11867911
+                {settings.contact_phone}
               </a>
               <p className="text-xs text-slate-400 mt-2">
-                Mon-Fri, 9 AM - 6 PM EST
+                {settings.working_hours}
               </p>
             </div>
 
@@ -108,10 +105,7 @@ export default function ContactPage() {
               <p className="text-sm text-slate-300 mb-3">
                 Visit our headquarters
               </p>
-              <p className="font-medium text-white">123 Trade Street</p>
-              <p className="text-sm text-slate-300">
-                New York, NY 10001
-              </p>
+              <p className="font-medium text-white">{settings.contact_address}</p>
             </div>
 
             {/* Hours Card */}

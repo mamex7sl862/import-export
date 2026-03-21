@@ -50,4 +50,5 @@ urlpatterns = [
     path('api/quotes/', include('quotes.urls')),
     path('api/contacts/', include('contacts.urls')),
     path('api/admin-panel/login/', admin_login, name='admin-login'),
+    path('api/settings/', include('settings_manager.urls')),
 ]
