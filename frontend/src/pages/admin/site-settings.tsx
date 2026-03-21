@@ -6,31 +6,32 @@ import { api } from "@/hooks/api";
 const BACKEND = import.meta.env.VITE_API_URL || "https://tradeflow-import-export-2.onrender.com";
 
 interface Settings {
-  company_name: string;
-  company_tagline: string;
-  company_description: string;
-  company_email: string;
-  company_phone: string;
-  company_address: string;
-  hero_badge_text: string;
-  hero_title: string;
-  hero_title_highlight: string;
-  hero_subtitle: string;
-  stat_years: string;
-  stat_countries: string;
-  stat_shipments: string;
-  about_title: string;
-  about_description: string;
-  about_story: string;
-  contact_email: string;
-  contact_phone: string;
-  contact_address: string;
-  working_hours: string;
-  facebook_url: string;
-  twitter_url: string;
-  linkedin_url: string;
-  instagram_url: string;
+  company_name: string; company_tagline: string; company_description: string;
+  company_email: string; company_phone: string; company_address: string;
+  hero_badge_text: string; hero_title: string; hero_title_highlight: string; hero_subtitle: string;
+  stat_years: string; stat_countries: string; stat_shipments: string;
+  about_title: string; about_description: string; about_story: string;
+  contact_email: string; contact_phone: string; contact_address: string; working_hours: string;
+  facebook_url: string; twitter_url: string; linkedin_url: string; instagram_url: string;
 }
+
+const defaultSettings: Settings = {
+  company_name: "TradeFlow", company_tagline: "Global Trade, Simplified.",
+  company_description: "Expert Import-Export solutions connecting your business to the world's most lucrative markets.",
+  company_email: "info@globalexports.com", company_phone: "+2519 11867911",
+  company_address: "123 Trade Street, New York, NY 10001",
+  hero_badge_text: "TRUSTED BY 2,000+ GLOBAL ENTERPRISES",
+  hero_title: "Global Trade,", hero_title_highlight: "Simplified.",
+  hero_subtitle: "Expert Import-Export solutions connecting your business to the world's most lucrative markets.",
+  stat_years: "15+", stat_countries: "50+", stat_shipments: "10K+",
+  about_title: "Your Trusted Partner in Global Commerce",
+  about_description: "For over two decades, we've been eliminating the complexity of international trade.",
+  about_story: "TradeFlow was founded with a simple mission: make international trade accessible to businesses of all sizes.",
+  contact_email: "info@globalexports.com", contact_phone: "+2519 11867911",
+  contact_address: "123 Trade Street, New York, NY 10001", working_hours: "Mon-Fri, 9 AM - 6 PM",
+  facebook_url: "https://facebook.com", twitter_url: "https://twitter.com",
+  linkedin_url: "https://linkedin.com", instagram_url: "https://instagram.com",
+};
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 mb-6">
@@ -49,13 +50,11 @@ const Field = ({
   <div className={full ? "md:col-span-2" : ""}>
     <label className="block text-xs font-medium text-slate-400 mb-1">{label}</label>
     {textarea ? (
-      <textarea
-        name={name} value={value} onChange={onChange} rows={3}
+      <textarea name={name} value={value} onChange={onChange} rows={3}
         className="w-full px-3 py-2 bg-slate-900/60 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37] resize-none"
       />
     ) : (
-      <input
-        type="text" name={name} value={value} onChange={onChange}
+      <input type="text" name={name} value={value} onChange={onChange}
         className="w-full px-3 py-2 bg-slate-900/60 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
       />
     )}
@@ -63,24 +62,30 @@ const Field = ({
 );
 
 export default function SiteSettingsPage() {
-  const [settings, setSettings] = useState<Settings | null>(null);
+  const [settings, setSettings] = useState<Settings>(defaultSettings);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [apiAvailable, setApiAvailable] = useState(true);
 
   useEffect(() => {
     fetch(`${BACKEND}/api/settings/`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
       .then((data) => { setSettings(data); setLoading(false); })
-      .catch(() => { toast.error("Failed to load settings"); setLoading(false); });
+      .catch((err) => {
+        console.warn("Settings API not available, using defaults:", err.message);
+        setApiAvailable(false);
+        setLoading(false);
+      });
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (!settings) return;
-    setSettings({ ...settings, [e.target.name]: e.target.value });
+    setSettings((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSave = async () => {
-    if (!settings) return;
     setSaving(true);
     try {
       const token = localStorage.getItem("admin_token");
@@ -89,7 +94,7 @@ export default function SiteSettingsPage() {
       });
       toast.success("Settings saved successfully");
     } catch {
-      toast.error("Failed to save settings");
+      toast.error("Failed to save — backend may still be deploying");
     } finally {
       setSaving(false);
     }
@@ -101,8 +106,6 @@ export default function SiteSettingsPage() {
     </div>
   );
 
-  if (!settings) return <p className="text-red-400">Failed to load settings.</p>;
-
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-6">
@@ -110,14 +113,19 @@ export default function SiteSettingsPage() {
           <h2 className="text-2xl font-bold text-white">Site Settings</h2>
           <p className="text-slate-400 text-sm mt-1">Edit website content without touching code</p>
         </div>
-        <button
-          onClick={handleSave} disabled={saving}
+        <button onClick={handleSave} disabled={saving}
           className="flex items-center gap-2 px-5 py-2.5 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-semibold rounded-xl transition-all disabled:opacity-60"
         >
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>
+
+      {!apiAvailable && (
+        <div className="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl text-yellow-400 text-sm">
+          Backend is still deploying. You can preview the form — saving will work once Render finishes deploying.
+        </div>
+      )}
 
       <Section title="Company Info">
         <Field label="Company Name" name="company_name" value={settings.company_name} onChange={handleChange} />
