@@ -11,6 +11,10 @@ interface Settings {
   hero_badge_text: string; hero_title: string; hero_title_highlight: string; hero_subtitle: string;
   stat_years: string; stat_countries: string; stat_shipments: string;
   about_title: string; about_description: string; about_story: string;
+  about_commitment: string; about_founded_text: string; about_founded_sub: string;
+  services_title: string; services_subtitle: string;
+  products_badge: string; products_title: string; products_subtitle: string;
+  quote_badge: string; quote_title: string; quote_subtitle: string;
   contact_email: string; contact_phone: string; contact_address: string; working_hours: string;
   facebook_url: string; twitter_url: string; linkedin_url: string; instagram_url: string;
 }
@@ -27,6 +31,12 @@ const defaultSettings: Settings = {
   about_title: "Your Trusted Partner in Global Commerce",
   about_description: "For over two decades, we've been eliminating the complexity of international trade.",
   about_story: "TradeFlow was founded with a simple mission: make international trade accessible to businesses of all sizes.",
+  about_commitment: "We're committed to transparency, reliability, and building long-term partnerships.",
+  about_founded_text: "Trusted by Fortune 500 Companies",
+  about_founded_sub: "Delivering excellence in global trade since 2004",
+  services_title: "Our Services", services_subtitle: "Comprehensive import-export solutions",
+  products_badge: "PRODUCT CATALOG", products_title: "Premium Import Solutions", products_subtitle: "Discover our curated selection of high-quality products",
+  quote_badge: "Get Started", quote_title: "Request a Custom Quote", quote_subtitle: "Get a personalized shipping quote tailored to your specific needs.",
   contact_email: "info@globalexports.com", contact_phone: "+2519 11867911",
   contact_address: "123 Trade Street, New York, NY 10001", working_hours: "Mon-Fri, 9 AM - 6 PM",
   facebook_url: "https://facebook.com", twitter_url: "https://twitter.com",
@@ -162,6 +172,23 @@ export default function SiteSettingsPage() {
         <Field label="About Title" name="about_title" value={settings.about_title} onChange={handleChange} full />
         <Field label="About Description" name="about_description" value={settings.about_description} onChange={handleChange} textarea full />
         <Field label="Our Story" name="about_story" value={settings.about_story} onChange={handleChange} textarea full />
+        <Field label="Our Commitment" name="about_commitment" value={settings.about_commitment || ""} onChange={handleChange} textarea full />
+        <Field label="Founded Text (image overlay)" name="about_founded_text" value={settings.about_founded_text || ""} onChange={handleChange} />
+        <Field label="Founded Sub-text" name="about_founded_sub" value={settings.about_founded_sub || ""} onChange={handleChange} />
+      </Section>
+
+      <Section title="Services & Products Sections">
+        <Field label="Services Title" name="services_title" value={settings.services_title || ""} onChange={handleChange} />
+        <Field label="Services Subtitle" name="services_subtitle" value={settings.services_subtitle || ""} onChange={handleChange} textarea full />
+        <Field label="Products Badge" name="products_badge" value={settings.products_badge || ""} onChange={handleChange} />
+        <Field label="Products Title" name="products_title" value={settings.products_title || ""} onChange={handleChange} />
+        <Field label="Products Subtitle" name="products_subtitle" value={settings.products_subtitle || ""} onChange={handleChange} textarea full />
+      </Section>
+
+      <Section title="Quote Form Section">
+        <Field label="Quote Badge" name="quote_badge" value={settings.quote_badge || ""} onChange={handleChange} />
+        <Field label="Quote Title" name="quote_title" value={settings.quote_title || ""} onChange={handleChange} />
+        <Field label="Quote Subtitle" name="quote_subtitle" value={settings.quote_subtitle || ""} onChange={handleChange} textarea full />
       </Section>
 
       <Section title="Contact Info">
