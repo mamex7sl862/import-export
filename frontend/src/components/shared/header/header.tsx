@@ -29,7 +29,12 @@ export default function Header() {
             <div className="w-7 h-7 bg-[#D4AF37] rounded-lg flex items-center justify-center">
               <Globe className="w-4 h-4 text-[#101828]" />
             </div>
-            <span className="font-bold text-base text-white">{settings.company_name}</span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold text-base text-white">{settings.company_name}</span>
+              {settings.company_tagline && (
+                <span className="text-[9px] text-[#D4AF37]/80 font-medium tracking-wide hidden sm:block">{settings.company_tagline}</span>
+              )}
+            </div>
           </div>
 
           {/* Desktop Navigation */}

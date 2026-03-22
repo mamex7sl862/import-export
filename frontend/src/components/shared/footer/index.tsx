@@ -49,7 +49,12 @@ export default function Footer() {
                 <div className="w-10 h-10 bg-[#1a2a6c] rounded-lg flex items-center justify-center text-white font-bold text-lg">
                   T
                 </div>
-                <span className="text-xl font-bold text-white">{settings.company_name}</span>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-xl font-bold text-white">{settings.company_name}</span>
+                  {settings.company_tagline && (
+                    <span className="text-xs text-[#D4AF37]/80 font-medium">{settings.company_tagline}</span>
+                  )}
+                </div>
               </div>
               <p className="text-slate-300 mb-6 leading-relaxed max-w-sm">
                 {settings.company_description}
