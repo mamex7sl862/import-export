@@ -11,12 +11,12 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-qzs8ah_dw-4gd@48zwl&euu%cru_=&d1)dqok19)zod!p)3a&j')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-qzs8ah_dw-4gd@48zwl&euu%cru_=&d1)dqok19)zod!p)3a&j')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = config('DEBUG', default='False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
 # Add Railway and Vercel domains
 if os.environ.get('RAILWAY_ENVIRONMENT'):
@@ -86,28 +86,30 @@ WSGI_APPLICATION = 'tradeflow_api.wsgi.application'
 
 
 # Database
-# Use MySQL in production (via DATABASE_URL), SQLite in development
-if os.environ.get('DATABASE_URL'):
-    import dj_database_url
+# Use DATABASE_URL (production/Render) > MYSQL_HOST (local MySQL) > SQLite fallback
+_database_url = config('DATABASE_URL', default='')
+_mysql_host = config('MYSQL_HOST', default='')
+
+if _database_url:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
+            default=_database_url,
             conn_max_age=600,
         )
     }
-elif os.environ.get('MYSQL_HOST'):
+elif _mysql_host:
     _mysql_options = {'charset': 'utf8mb4'}
     # Only require SSL in production (not local dev)
-    if not os.environ.get('DEBUG', 'False') == 'True':
+    if not DEBUG:
         _mysql_options['ssl'] = {'ssl-mode': 'REQUIRED'}
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('MYSQL_DATABASE', 'tradeflow'),
-            'USER': os.environ.get('MYSQL_USER', 'root'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),
-            'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
-            'PORT': os.environ.get('MYSQL_PORT', '3306'),
+            'NAME': config('MYSQL_DATABASE', default='tradeflow'),
+            'USER': config('MYSQL_USER', default='root'),
+            'PASSWORD': config('MYSQL_PASSWORD', default=''),
+            'HOST': _mysql_host,
+            'PORT': config('MYSQL_PORT', default='3306'),
             'OPTIONS': _mysql_options,
         }
     }
@@ -164,9 +166,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = os.environ.get(
+CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    'http://localhost:5173,http://localhost:5174,http://localhost:3000'
+    default='http://localhost:5173,http://localhost:5174,http://localhost:3000'
 ).split(',')
 
 # Always include the Vercel frontend
@@ -175,8 +177,9 @@ CORS_ALLOWED_ORIGINS += [
 ]
 
 # Add any extra frontend URL from env
-if os.environ.get('FRONTEND_URL'):
-    CORS_ALLOWED_ORIGINS.append(os.environ.get('FRONTEND_URL'))
+_frontend_url = config('FRONTEND_URL', default='')
+if _frontend_url:
+    CORS_ALLOWED_ORIGINS.append(_frontend_url)
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
