@@ -32,10 +32,10 @@ export default function AboutPage() {
   const { settings } = useSiteSettings();
 
   const stats = [
-    { value: settings.stat_years, label: "Years Experience" },
-    { value: settings.stat_countries, label: "Countries Served" },
-    { value: settings.stat_shipments, label: "Shipments Delivered" },
-    { value: "99.8%", label: "Success Rate" },
+    { value: settings.stat_years, label: settings.stat_years_label },
+    { value: settings.stat_countries, label: settings.stat_countries_label },
+    { value: settings.stat_shipments, label: settings.stat_shipments_label },
+    { value: settings.stat_success_rate, label: settings.stat_success_label },
   ];
 
   return (
@@ -89,8 +89,8 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="bg-slate-800/90 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50">
-                    <div className="text-2xl font-bold text-white mb-2">Trusted by Fortune 500 Companies</div>
-                    <div className="text-slate-300">Delivering excellence in global trade since 2004</div>
+                    <div className="text-2xl font-bold text-white mb-2">{settings.about_founded_text}</div>
+                    <div className="text-slate-300">{settings.about_founded_sub}</div>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h3 className="text-white font-bold mb-2">Our Commitment</h3>
-                    <p className="text-slate-300">We're committed to transparency, reliability, and building long-term partnerships that drive mutual success.</p>
+                    <p className="text-slate-300">{settings.about_commitment}</p>
                   </div>
                 </div>
               </div>

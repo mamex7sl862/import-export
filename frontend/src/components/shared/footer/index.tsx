@@ -57,7 +57,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-slate-300 mb-6 leading-relaxed max-w-sm">
-                {settings.company_description}
+                {settings.footer_tagline || settings.company_description}
               </p>
               <div className="flex gap-3">
                 <a href={settings.facebook_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]" aria-label="Facebook"><Facebook className="w-5 h-5" /></a>

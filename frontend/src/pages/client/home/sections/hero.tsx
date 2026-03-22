@@ -62,7 +62,7 @@ export default function HeroSection() {
                   className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-bold text-base h-12 px-8 rounded-xl shadow-2xl hover:shadow-[#D4AF37]/25 transition-all duration-300 transform hover:scale-105"
                   onClick={scrollToQuoteForm}
                 >
-                  Request a Quote
+                  {settings.hero_cta_primary}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
@@ -73,7 +73,7 @@ export default function HeroSection() {
                   onClick={() => navigate("/services")}
                 >
                   <Play className="mr-2 h-4 w-4" />
-                  Our Products
+                  {settings.hero_cta_secondary}
                 </Button>
               </div>
 
@@ -81,15 +81,15 @@ export default function HeroSection() {
               <div className="flex flex-wrap items-center gap-6 mt-12 pt-8 border-t border-white/10">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_years}</div>
-                  <div className="text-xs text-white/70 font-medium">Years Experience</div>
+                  <div className="text-xs text-white/70 font-medium">{settings.stat_years_label}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_countries}</div>
-                  <div className="text-xs text-white/70 font-medium">Countries Served</div>
+                  <div className="text-xs text-white/70 font-medium">{settings.stat_countries_label}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-[#D4AF37] mb-1">{settings.stat_shipments}</div>
-                  <div className="text-xs text-white/70 font-medium">Shipments Delivered</div>
+                  <div className="text-xs text-white/70 font-medium">{settings.stat_shipments_label}</div>
                 </div>
               </div>
             </motion.div>

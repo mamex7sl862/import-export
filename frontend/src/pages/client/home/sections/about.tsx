@@ -1,7 +1,9 @@
 import { Shield, Zap, Globe2, Award, CheckCircle2, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export default function About() {
+  const { settings } = useSiteSettings();
   const features = [
     {
       icon: Shield,
@@ -59,14 +61,14 @@ export default function About() {
           </div>
           
           <h2 className="text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-            Simplifying Global Trade
+            {settings.about_title}
             <span className="block bg-gradient-to-r from-[#D4AF37] to-amber-300 bg-clip-text text-transparent">
               For Modern Business
             </span>
           </h2>
           
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Two decades of expertise in international logistics, customs compliance, and supply chain optimization.
+            {settings.about_description}
           </p>
         </motion.div>
 
@@ -137,13 +139,11 @@ export default function About() {
                 </h3>
                 
                 <p className="text-lg text-slate-300 leading-relaxed mb-6">
-                  International trade shouldn't be complicated. We've spent 20+ years building the infrastructure, 
-                  relationships, and expertise to make global commerce seamless for businesses of all sizes.
+                  {settings.about_story}
                 </p>
 
                 <p className="text-lg text-slate-300 leading-relaxed">
-                  From customs documentation to last-mile delivery, we handle every detail so you can focus on 
-                  what matters most—growing your business globally.
+                  {settings.about_commitment}
                 </p>
               </div>
 

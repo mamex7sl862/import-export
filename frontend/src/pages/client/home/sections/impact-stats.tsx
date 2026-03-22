@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 interface StatProps {
   end: number;
@@ -49,23 +50,25 @@ function AnimatedCounter({ end, suffix, duration = 2000 }: StatProps) {
 }
 
 export default function ImpactStats() {
+  const { settings } = useSiteSettings();
+
   const stats = [
     {
-      value: 15,
-      suffix: "+",
-      label: "Years Experience",
+      value: parseInt(settings.stat_years) || 15,
+      suffix: settings.stat_years.replace(/[0-9]/g, "") || "+",
+      label: settings.stat_years_label,
       description: "Delivering excellence in international trade"
     },
     {
-      value: 50,
-      suffix: "+",
-      label: "Countries Served",
+      value: parseInt(settings.stat_countries) || 50,
+      suffix: settings.stat_countries.replace(/[0-9]/g, "") || "+",
+      label: settings.stat_countries_label,
       description: "Global network spanning all continents"
     },
     {
-      value: 10,
-      suffix: "K+",
-      label: "Shipments Delivered",
+      value: parseInt(settings.stat_shipments) || 10,
+      suffix: settings.stat_shipments.replace(/[0-9]/g, "") || "K+",
+      label: settings.stat_shipments_label,
       description: "Successfully completed trade operations"
     }
   ];

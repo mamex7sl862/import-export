@@ -14,8 +14,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MapPin, Package, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/hooks/api";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export default function QuoteForm() {
+  const { settings } = useSiteSettings();
   const [formData, setFormData] = useState({
     origin: "",
     destination: "",
@@ -106,14 +108,13 @@ export default function QuoteForm() {
           {/* Left Side - Info */}
           <div>
             <p className="text-sm font-bold uppercase tracking-wider text-[#D4AF37] mb-3">
-              Get Started
+              {settings.quote_badge}
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Request a Custom Quote
+              {settings.quote_title}
             </h2>
             <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-              Get a personalized shipping quote tailored to your specific needs. Our logistics
-              experts will analyze your requirements and provide competitive pricing within 24 hours.
+              {settings.quote_subtitle}
             </p>
 
             <div className="space-y-6">
