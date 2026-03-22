@@ -1,14 +1,15 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin } from "lucide-react"
+import { useSiteSettings } from "@/hooks/useSiteSettings"
 
 export default function Contact() {
+  const { settings } = useSiteSettings();
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -54,7 +55,7 @@ export default function Contact() {
               <Phone className="h-6 w-6 text-[#d4af37]" />
             </div>
             <h3 className="font-semibold text-white">Phone</h3>
-            <p className="mt-2 text-sm text-slate-300">+1 (555) 123-4567</p>
+            <p className="mt-2 text-sm text-slate-300">{settings.company_phone}</p>
             <p className="text-xs text-slate-400">Available 24/7</p>
           </div>
 
@@ -63,7 +64,7 @@ export default function Contact() {
               <Mail className="h-6 w-6 text-[#d4af37]" />
             </div>
             <h3 className="font-semibold text-white">Email</h3>
-            <p className="mt-2 text-sm text-slate-300">support@tradeglobal.com</p>
+            <p className="mt-2 text-sm text-slate-300">{settings.company_email}</p>
             <p className="text-xs text-slate-400">Response within 2 hours</p>
           </div>
 
@@ -72,8 +73,7 @@ export default function Contact() {
               <MapPin className="h-6 w-6 text-[#d4af37]" />
             </div>
             <h3 className="font-semibold text-white">Office</h3>
-            <p className="mt-2 text-sm text-slate-300">123 Global Trade Ave</p>
-            <p className="text-xs text-slate-400">New York, NY 10001</p>
+            <p className="mt-2 text-sm text-slate-300">{settings.company_address}</p>
           </div>
         </div>
 

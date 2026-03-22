@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Send } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export default function Footer() {
+  const { settings } = useSiteSettings();
+  const year = new Date().getFullYear();
   return (
     <>
       {/* Newsletter Section */}
@@ -46,49 +49,16 @@ export default function Footer() {
                 <div className="w-10 h-10 bg-[#1a2a6c] rounded-lg flex items-center justify-center text-white font-bold text-lg">
                   T
                 </div>
-                <span className="text-xl font-bold text-white">TradeFlow</span>
+                <span className="text-xl font-bold text-white">{settings.company_name}</span>
               </div>
               <p className="text-slate-300 mb-6 leading-relaxed max-w-sm">
-                Your trusted partner in global logistics. Connecting businesses worldwide with 
-                seamless import-export solutions since 1999.
+                {settings.company_description}
               </p>
               <div className="flex gap-3">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]"
-                  aria-label="Visit our Facebook page"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]"
-                  aria-label="Visit our Twitter page"
-                >
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]"
-                  aria-label="Visit our LinkedIn page"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]"
-                  aria-label="Visit our Instagram page"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
+                <a href={settings.facebook_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]" aria-label="Facebook"><Facebook className="w-5 h-5" /></a>
+                <a href={settings.twitter_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]" aria-label="Twitter"><Twitter className="w-5 h-5" /></a>
+                <a href={settings.linkedin_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]" aria-label="LinkedIn"><Linkedin className="w-5 h-5" /></a>
+                <a href={settings.instagram_url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-[#d4af37] flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] text-slate-300 hover:text-[#101828]" aria-label="Instagram"><Instagram className="w-5 h-5" /></a>
               </div>
             </div>
 
@@ -192,27 +162,15 @@ export default function Footer() {
               <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3">
                   <Mail className="h-5 w-5 text-[#d4af37] mt-0.5 flex-shrink-0" />
-                  <a 
-                    href="mailto:hello@tradehub.com"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    hello@tradehub.com
-                  </a>
+                  <a href={`mailto:${settings.company_email}`} className="text-slate-300 hover:text-[#d4af37] transition-colors">{settings.company_email}</a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="h-5 w-5 text-[#d4af37] mt-0.5 flex-shrink-0" />
-                  <a 
-                    href="tel:+251991001124"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    +251 991 001 124
-                  </a>
+                  <a href={`tel:${settings.company_phone}`} className="text-slate-300 hover:text-[#d4af37] transition-colors">{settings.company_phone}</a>
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-[#d4af37] mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">
-                    Addis Ababa, Ethiopia
-                  </span>
+                  <span className="text-slate-300">{settings.company_address}</span>
                 </li>
               </ul>
             </div>
@@ -221,7 +179,7 @@ export default function Footer() {
           {/* Divider */}
           <div className="border-t border-slate-700/50 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400">
-              <p>&copy; 2025 TradeFlow. All rights reserved.</p>
+              <p>&copy; {year} {settings.company_name}. All rights reserved.</p>
               <p className="text-base font-bold">
                 Created by{" "}
                 <a
