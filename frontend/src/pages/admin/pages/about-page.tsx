@@ -33,18 +33,21 @@ export default function AboutAdminPage() {
         </button>
       </div>
 
-      <SettingsBlock title="Page Header (banner at top of About page)">
+      {/* 1. Page Header */}
+      <SettingsBlock title="1 · Page Header (banner at top)">
         <Field label="Badge Text" name="about_page_badge" value={settings.about_page_badge} onChange={handleChange} />
         <Field label="Page Title" name="about_page_title" value={settings.about_page_title} onChange={handleChange} />
         <Field label="Page Subtitle" name="about_page_subtitle" value={settings.about_page_subtitle} onChange={handleChange} textarea full />
       </SettingsBlock>
 
-      <SettingsBlock title="Hero Section">
+      {/* 2. Hero */}
+      <SettingsBlock title="2 · Hero Section">
         <Field label="Section Title" name="about_title" value={settings.about_title} onChange={handleChange} full />
         <Field label="Description" name="about_description" value={settings.about_description} onChange={handleChange} textarea full />
       </SettingsBlock>
 
-      <SettingsBlock title="Stats">
+      {/* 3. Stats */}
+      <SettingsBlock title="3 · Stats Bar">
         <Field label="Years Value (e.g. 15+)" name="stat_years" value={settings.stat_years} onChange={handleChange} />
         <Field label="Years Label" name="stat_years_label" value={settings.stat_years_label} onChange={handleChange} />
         <Field label="Countries Value (e.g. 50+)" name="stat_countries" value={settings.stat_countries} onChange={handleChange} />
@@ -55,7 +58,8 @@ export default function AboutAdminPage() {
         <Field label="Success Label" name="stat_success_label" value={settings.stat_success_label} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Our Story Section">
+      {/* 4. Our Story */}
+      <SettingsBlock title="4 · Our Story Section">
         <Field label="Story Image URL" name="about_story_image" value={settings.about_story_image} onChange={handleChange} full />
         <Field label="Our Story Text" name="about_story" value={settings.about_story} onChange={handleChange} textarea full />
         <Field label="Our Commitment" name="about_commitment" value={settings.about_commitment} onChange={handleChange} textarea full />
@@ -63,87 +67,91 @@ export default function AboutAdminPage() {
         <Field label="Founded Sub-text" name="about_founded_sub" value={settings.about_founded_sub} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Core Values — Section Heading">
+      {/* 5. Core Values */}
+      <SettingsBlock title="5 · Core Values — Section Heading">
         <Field label="Section Title" name="about_values_title" value={settings.about_values_title} onChange={handleChange} />
         <Field label="Section Subtitle" name="about_values_subtitle" value={settings.about_values_subtitle} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Core Values — Value 1">
+      <SettingsBlock title="5 · Core Values — Value 1">
         <Field label="Title" name="value1_title" value={settings.value1_title} onChange={handleChange} />
         <Field label="Description" name="value1_desc" value={settings.value1_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Core Values — Value 2">
+      <SettingsBlock title="5 · Core Values — Value 2">
         <Field label="Title" name="value2_title" value={settings.value2_title} onChange={handleChange} />
         <Field label="Description" name="value2_desc" value={settings.value2_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Core Values — Value 3">
+      <SettingsBlock title="5 · Core Values — Value 3">
         <Field label="Title" name="value3_title" value={settings.value3_title} onChange={handleChange} />
         <Field label="Description" name="value3_desc" value={settings.value3_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Core Values — Value 4">
+      <SettingsBlock title="5 · Core Values — Value 4">
         <Field label="Title" name="value4_title" value={settings.value4_title} onChange={handleChange} />
         <Field label="Description" name="value4_desc" value={settings.value4_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Our Journey — Section Heading">
+      {/* 6. Our Journey */}
+      <SettingsBlock title="6 · Our Journey — Section Heading">
         <Field label="Section Title" name="about_journey_title" value={settings.about_journey_title} onChange={handleChange} />
         <Field label="Section Subtitle" name="about_journey_subtitle" value={settings.about_journey_subtitle} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Milestone 1">
+      <SettingsBlock title="6 · Milestone 1">
         <Field label="Year" name="milestone1_year" value={settings.milestone1_year} onChange={handleChange} />
         <Field label="Title" name="milestone1_title" value={settings.milestone1_title} onChange={handleChange} />
         <Field label="Description" name="milestone1_desc" value={settings.milestone1_desc} onChange={handleChange} full />
       </SettingsBlock>
 
-      <SettingsBlock title="Milestone 2">
+      <SettingsBlock title="6 · Milestone 2">
         <Field label="Year" name="milestone2_year" value={settings.milestone2_year} onChange={handleChange} />
         <Field label="Title" name="milestone2_title" value={settings.milestone2_title} onChange={handleChange} />
         <Field label="Description" name="milestone2_desc" value={settings.milestone2_desc} onChange={handleChange} full />
       </SettingsBlock>
 
-      <SettingsBlock title="Milestone 3">
+      <SettingsBlock title="6 · Milestone 3">
         <Field label="Year" name="milestone3_year" value={settings.milestone3_year} onChange={handleChange} />
         <Field label="Title" name="milestone3_title" value={settings.milestone3_title} onChange={handleChange} />
         <Field label="Description" name="milestone3_desc" value={settings.milestone3_desc} onChange={handleChange} full />
       </SettingsBlock>
 
-      <SettingsBlock title="Milestone 4">
+      <SettingsBlock title="6 · Milestone 4">
         <Field label="Year" name="milestone4_year" value={settings.milestone4_year} onChange={handleChange} />
         <Field label="Title" name="milestone4_title" value={settings.milestone4_title} onChange={handleChange} />
         <Field label="Description" name="milestone4_desc" value={settings.milestone4_desc} onChange={handleChange} full />
       </SettingsBlock>
 
-      <SettingsBlock title="Milestone 5">
+      <SettingsBlock title="6 · Milestone 5">
         <Field label="Year" name="milestone5_year" value={settings.milestone5_year} onChange={handleChange} />
         <Field label="Title" name="milestone5_title" value={settings.milestone5_title} onChange={handleChange} />
         <Field label="Description" name="milestone5_desc" value={settings.milestone5_desc} onChange={handleChange} full />
       </SettingsBlock>
 
-      <SettingsBlock title="Why Choose Us — Feature 1">
+      {/* 7. Why Choose Us */}
+      <SettingsBlock title="7 · Why Choose Us — Feature 1">
         <Field label="Title" name="feature1_title" value={settings.feature1_title} onChange={handleChange} />
         <Field label="Description" name="feature1_desc" value={settings.feature1_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Why Choose Us — Feature 2">
+      <SettingsBlock title="7 · Why Choose Us — Feature 2">
         <Field label="Title" name="feature2_title" value={settings.feature2_title} onChange={handleChange} />
         <Field label="Description" name="feature2_desc" value={settings.feature2_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Why Choose Us — Feature 3">
+      <SettingsBlock title="7 · Why Choose Us — Feature 3">
         <Field label="Title" name="feature3_title" value={settings.feature3_title} onChange={handleChange} />
         <Field label="Description" name="feature3_desc" value={settings.feature3_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Why Choose Us — Feature 4">
+      <SettingsBlock title="7 · Why Choose Us — Feature 4">
         <Field label="Title" name="feature4_title" value={settings.feature4_title} onChange={handleChange} />
         <Field label="Description" name="feature4_desc" value={settings.feature4_desc} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="CTA Section (bottom of About page)">
+      {/* 8. CTA */}
+      <SettingsBlock title="8 · CTA Section (bottom of About page)">
         <Field label="Title" name="about_cta_title" value={settings.about_cta_title} onChange={handleChange} full />
         <Field label="Subtitle" name="about_cta_subtitle" value={settings.about_cta_subtitle} onChange={handleChange} textarea full />
         <Field label="Primary Button Text" name="about_cta_primary" value={settings.about_cta_primary} onChange={handleChange} />

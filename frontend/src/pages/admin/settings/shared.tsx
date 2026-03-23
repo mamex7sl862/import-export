@@ -67,6 +67,7 @@ export interface Settings {
   contact_page_badge: string; contact_page_title: string; contact_page_subtitle: string;
   blog_page_badge: string; blog_page_title: string; blog_page_subtitle: string;
   facebook_url: string; twitter_url: string; linkedin_url: string; instagram_url: string;
+  google_map_url: string;
 }
 
 export const defaultSettings: Settings = {
@@ -162,6 +163,7 @@ export const defaultSettings: Settings = {
   blog_page_subtitle: "Stay updated with the latest insights, trends, and tips in global trade and logistics.",
   facebook_url: "https://facebook.com", twitter_url: "https://twitter.com",
   linkedin_url: "https://linkedin.com", instagram_url: "https://instagram.com",
+  google_map_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.304185416782!2d38.7469643!3d9.0301872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8530b1f5c7b1%3A0x4b7b63e0718f6a6f!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1701532145678!5m2!1sen!2sus",
 };
 
 export function useSettingsPage() {

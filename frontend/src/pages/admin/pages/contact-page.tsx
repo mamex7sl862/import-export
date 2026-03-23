@@ -33,13 +33,13 @@ export default function ContactAdminPage() {
         </button>
       </div>
 
-      <SettingsBlock title="Contact Page Header (banner at top of Contact page)">
+      <SettingsBlock title="1 · Page Header (banner at top)">
         <Field label="Badge Text" name="contact_page_badge" value={settings.contact_page_badge} onChange={handleChange} />
         <Field label="Page Title" name="contact_page_title" value={settings.contact_page_title} onChange={handleChange} />
         <Field label="Page Subtitle" name="contact_page_subtitle" value={settings.contact_page_subtitle} onChange={handleChange} textarea full />
       </SettingsBlock>
 
-      <SettingsBlock title="Contact Details">
+      <SettingsBlock title="2 · Contact Details">
         <Field label="Contact Email" name="contact_email" value={settings.contact_email} onChange={handleChange} />
         <Field label="Contact Phone" name="contact_phone" value={settings.contact_phone} onChange={handleChange} />
         <Field label="Office Address" name="contact_address" value={settings.contact_address} onChange={handleChange} full />
@@ -47,13 +47,17 @@ export default function ContactAdminPage() {
         <Field label="Working Hours (Saturday)" name="working_hours_sat" value={settings.working_hours_sat} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Office Hours Display">
+      <SettingsBlock title="3 · Office Hours Display">
         <Field label="Weekday Hours (e.g. 9 AM - 6 PM)" name="contact_hours_weekday" value={settings.contact_hours_weekday} onChange={handleChange} />
         <Field label="Saturday Hours" name="contact_hours_sat" value={settings.contact_hours_sat} onChange={handleChange} />
         <Field label="Sunday Hours (e.g. Closed)" name="contact_hours_sun" value={settings.contact_hours_sun} onChange={handleChange} />
       </SettingsBlock>
 
-      <SettingsBlock title="Quick Stats (bottom of contact page)">
+      <SettingsBlock title="4 · Google Map Location">
+        <Field label="Google Maps Embed URL (paste the src= URL from Google Maps embed code)" name="google_map_url" value={settings.google_map_url} onChange={handleChange} full />
+      </SettingsBlock>
+
+      <SettingsBlock title="5 · Quick Stats (bottom of contact page)">
         <Field label="Stat 1 Title" name="contact_stat1_title" value={settings.contact_stat1_title} onChange={handleChange} />
         <Field label="Stat 1 Description" name="contact_stat1_desc" value={settings.contact_stat1_desc} onChange={handleChange} />
         <Field label="Stat 2 Title" name="contact_stat2_title" value={settings.contact_stat2_title} onChange={handleChange} />

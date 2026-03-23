@@ -256,7 +256,7 @@ function SectionSettings() {
 export default function ServicesAdminPage() {
   const [tab, setTab] = useState<"settings" | "services" | "products">("settings");
   const tabs = [
-    { key: "settings", label: "Section Settings" },
+    { key: "settings", label: "Page Header & Settings" },
     { key: "services", label: "Service Cards" },
     { key: "products", label: "Products" },
   ] as const;

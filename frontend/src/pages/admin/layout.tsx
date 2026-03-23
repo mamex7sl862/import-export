@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import {
   Globe, LayoutDashboard, MessageSquare, ClipboardList,
   LogOut, Menu, X, Building2, Star, Home, Info, Briefcase, Phone,
-  BookOpen, ChevronDown, ChevronRight, Settings,
+  BookOpen, ChevronDown, ChevronRight, Settings, LayoutTemplate,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -20,6 +20,7 @@ const pageNav = [
   { label: "Services Page", href: "/1/pages/services", icon: Briefcase },
   { label: "Contact Page", href: "/1/pages/contact", icon: Phone },
   { label: "Blog Page", href: "/1/pages/blog", icon: BookOpen },
+  { label: "Footer", href: "/1/pages/footer", icon: LayoutTemplate },
 ];
 
 const globalNav = [
