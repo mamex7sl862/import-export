@@ -11,7 +11,6 @@ import BlogDetailPage from "@/pages/client/blog/detail";
 import AdminLogin from "@/pages/admin/login";
 import AdminLayout from "@/pages/admin/layout";
 import AdminDashboard from "@/pages/admin/dashboard";
-import AdminBlog from "@/pages/admin/blog";
 import AdminContacts from "@/pages/admin/contacts";
 import AdminQuotes from "@/pages/admin/quotes";
 
@@ -48,7 +47,7 @@ const Routes = () => {
       element: <AdminLayout />,
       children: [
         { path: "dashboard", element: <AdminDashboard /> },
-        { path: "blog", element: <AdminBlog /> },
+        { path: "blog", element: <Navigate to="/1/pages/blog" replace /> },
         { path: "contacts", element: <AdminContacts /> },
         { path: "quotes", element: <AdminQuotes /> },
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import {
-  Globe, LayoutDashboard, FileText, MessageSquare, ClipboardList,
+  Globe, LayoutDashboard, MessageSquare, ClipboardList,
   LogOut, Menu, X, Building2, Star, Home, Info, Briefcase, Phone,
   BookOpen, ChevronDown, ChevronRight, Settings,
 } from "lucide-react";
@@ -9,7 +9,6 @@ import { toast } from "sonner";
 
 const mainNav = [
   { label: "Dashboard", href: "/1/dashboard", icon: LayoutDashboard },
-  { label: "Blog Posts", href: "/1/blog", icon: FileText },
   { label: "Contacts", href: "/1/contacts", icon: MessageSquare },
   { label: "Quotes", href: "/1/quotes", icon: ClipboardList },
 ];
