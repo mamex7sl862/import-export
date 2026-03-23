@@ -6,27 +6,8 @@ import { ArrowRight, Globe, Shield, TrendingUp, Users, Award, CheckCircle2, Targ
 import PageHeader from "./header";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
-const values = [
-  { icon: Target, title: "Customer First", description: "Your success is our priority. We tailor solutions to meet your unique needs." },
-  { icon: Shield, title: "Integrity", description: "Transparent operations and ethical practices in every transaction." },
-  { icon: Lightbulb, title: "Innovation", description: "Leveraging technology to streamline global trade operations." },
-  { icon: Heart, title: "Excellence", description: "Committed to delivering exceptional service quality every time." },
-];
-
-const milestones = [
-  { year: "2004", title: "Company Founded", description: "Started with a vision to simplify global trade" },
-  { year: "2010", title: "Global Expansion", description: "Extended services to 50+ countries" },
-  { year: "2015", title: "Technology Integration", description: "Launched real-time tracking platform" },
-  { year: "2020", title: "Industry Leader", description: "Recognized as top logistics provider" },
-  { year: "2024", title: "Sustainable Future", description: "Committed to eco-friendly operations" },
-];
-
-const features = [
-  { icon: Globe, title: "Global Network", description: "Strategic partnerships across 150+ countries for seamless operations" },
-  { icon: Shield, title: "Compliance Expertise", description: "ISO certified with full regulatory compliance in all markets" },
-  { icon: TrendingUp, title: "Growth Partner", description: "Scalable solutions that grow with your business needs" },
-  { icon: Users, title: "Dedicated Support", description: "24/7 expert assistance from your personal trade specialists" },
-];
+const valueIcons = [Target, Shield, Lightbulb, Heart];
+const featureIcons = [Globe, Shield, TrendingUp, Users];
 
 export default function AboutPage() {
   const { settings } = useSiteSettings();
@@ -38,6 +19,28 @@ export default function AboutPage() {
     { value: settings.stat_success_rate, label: settings.stat_success_label },
   ];
 
+  const values = [
+    { icon: valueIcons[0], title: settings.value1_title, description: settings.value1_desc },
+    { icon: valueIcons[1], title: settings.value2_title, description: settings.value2_desc },
+    { icon: valueIcons[2], title: settings.value3_title, description: settings.value3_desc },
+    { icon: valueIcons[3], title: settings.value4_title, description: settings.value4_desc },
+  ];
+
+  const milestones = [
+    { year: settings.milestone1_year, title: settings.milestone1_title, description: settings.milestone1_desc },
+    { year: settings.milestone2_year, title: settings.milestone2_title, description: settings.milestone2_desc },
+    { year: settings.milestone3_year, title: settings.milestone3_title, description: settings.milestone3_desc },
+    { year: settings.milestone4_year, title: settings.milestone4_title, description: settings.milestone4_desc },
+    { year: settings.milestone5_year, title: settings.milestone5_title, description: settings.milestone5_desc },
+  ];
+
+  const features = [
+    { icon: featureIcons[0], title: settings.feature1_title, description: settings.feature1_desc },
+    { icon: featureIcons[1], title: settings.feature2_title, description: settings.feature2_desc },
+    { icon: featureIcons[2], title: settings.feature3_title, description: settings.feature3_desc },
+    { icon: featureIcons[3], title: settings.feature4_title, description: settings.feature4_desc },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-900">
       <PageHeader />
@@ -46,7 +49,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-6 py-24 md:py-32">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
         </div>
         <div className="mx-auto max-w-7xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center max-w-4xl mx-auto">
@@ -54,9 +57,7 @@ export default function AboutPage() {
               <Award className="w-4 h-4 text-[#D4AF37]" />
               <span className="text-sm font-semibold text-[#D4AF37] uppercase tracking-wider">About {settings.company_name}</span>
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
-              {settings.about_title}
-            </h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">{settings.about_title}</h1>
             <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-3xl mx-auto">{settings.about_description}</p>
             <Button size="lg" className="gap-2 group bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-slate-900 font-bold">
               Get Started <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -85,7 +86,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img src="/global-trade-shipping-containers.jpg" alt="TradeFlow Operations" className="w-full h-full object-cover aspect-[4/3]" />
+                <img src={settings.about_story_image || "/global-trade-shipping-containers.jpg"} alt="TradeFlow Operations" className="w-full h-full object-cover aspect-[4/3]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="bg-slate-800/90 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50">
@@ -118,8 +119,8 @@ export default function AboutPage() {
       <section className="py-24 bg-slate-900 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 relative">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Our Core Values</h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">The principles that guide everything we do</p>
+            <h2 className="text-4xl font-bold text-white mb-4">{settings.about_values_title}</h2>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">{settings.about_values_subtitle}</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => {
@@ -142,16 +143,16 @@ export default function AboutPage() {
       <section className="py-24 bg-gradient-to-b from-slate-800 to-slate-900 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 relative">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Our Journey</h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">Key milestones in our growth story</p>
+            <h2 className="text-4xl font-bold text-white mb-4">{settings.about_journey_title}</h2>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">{settings.about_journey_subtitle}</p>
           </motion.div>
           <div className="relative">
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#D4AF37] via-[#D4AF37]/50 to-transparent transform -translate-x-1/2 hidden md:block" />
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
-                <motion.div key={index} initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: index * 0.1 }} viewport={{ once: true }} className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                <motion.div key={index} initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: index * 0.1 }} viewport={{ once: true }} className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
                   <div className="flex-1 md:text-right">
-                    <div className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 ${index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'} max-w-md`}>
+                    <div className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 ${index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"} max-w-md`}>
                       <div className="text-2xl font-bold text-[#D4AF37] mb-2">{milestone.year}</div>
                       <h3 className="text-xl font-bold text-white mb-2">{milestone.title}</h3>
                       <p className="text-slate-300">{milestone.description}</p>
@@ -194,13 +195,11 @@ export default function AboutPage() {
       <section className="py-24 bg-gradient-to-br from-slate-800 via-indigo-950 to-slate-900 relative overflow-hidden">
         <div className="mx-auto max-w-4xl px-6 relative text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Go Global?</h2>
-            <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-              Let's discuss how we can help your business expand into new markets with confidence and ease.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{settings.about_cta_title}</h2>
+            <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">{settings.about_cta_subtitle}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-slate-900 font-bold">Schedule Consultation</Button>
-              <Button size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-800">View Services</Button>
+              <Button size="lg" className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-slate-900 font-bold">{settings.about_cta_primary}</Button>
+              <Button size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-800">{settings.about_cta_secondary}</Button>
             </div>
           </motion.div>
         </div>

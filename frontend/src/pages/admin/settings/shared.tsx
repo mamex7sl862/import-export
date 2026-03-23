@@ -16,6 +16,24 @@ export interface Settings {
   stat_success_rate: string; stat_success_label: string;
   about_title: string; about_description: string; about_story: string;
   about_commitment: string; about_founded_text: string; about_founded_sub: string;
+  about_story_image: string;
+  value1_title: string; value1_desc: string;
+  value2_title: string; value2_desc: string;
+  value3_title: string; value3_desc: string;
+  value4_title: string; value4_desc: string;
+  milestone1_year: string; milestone1_title: string; milestone1_desc: string;
+  milestone2_year: string; milestone2_title: string; milestone2_desc: string;
+  milestone3_year: string; milestone3_title: string; milestone3_desc: string;
+  milestone4_year: string; milestone4_title: string; milestone4_desc: string;
+  milestone5_year: string; milestone5_title: string; milestone5_desc: string;
+  feature1_title: string; feature1_desc: string;
+  feature2_title: string; feature2_desc: string;
+  feature3_title: string; feature3_desc: string;
+  feature4_title: string; feature4_desc: string;
+  about_cta_title: string; about_cta_subtitle: string;
+  about_cta_primary: string; about_cta_secondary: string;
+  about_values_title: string; about_values_subtitle: string;
+  about_journey_title: string; about_journey_subtitle: string;
   services_title: string; services_subtitle: string;
   products_badge: string; products_title: string; products_subtitle: string;
   quote_badge: string; quote_title: string; quote_subtitle: string;
@@ -48,6 +66,25 @@ export const defaultSettings: Settings = {
   about_commitment: "We're committed to transparency, reliability, and building long-term partnerships.",
   about_founded_text: "Trusted by Fortune 500 Companies",
   about_founded_sub: "Delivering excellence in global trade since 2004",
+  about_story_image: "/global-trade-shipping-containers.jpg",
+  value1_title: "Customer First", value1_desc: "Your success is our priority. We tailor solutions to meet your unique needs.",
+  value2_title: "Integrity", value2_desc: "Transparent operations and ethical practices in every transaction.",
+  value3_title: "Innovation", value3_desc: "Leveraging technology to streamline global trade operations.",
+  value4_title: "Excellence", value4_desc: "Committed to delivering exceptional service quality every time.",
+  milestone1_year: "2004", milestone1_title: "Company Founded", milestone1_desc: "Started with a vision to simplify global trade",
+  milestone2_year: "2010", milestone2_title: "Global Expansion", milestone2_desc: "Extended services to 50+ countries",
+  milestone3_year: "2015", milestone3_title: "Technology Integration", milestone3_desc: "Launched real-time tracking platform",
+  milestone4_year: "2020", milestone4_title: "Industry Leader", milestone4_desc: "Recognized as top logistics provider",
+  milestone5_year: "2024", milestone5_title: "Sustainable Future", milestone5_desc: "Committed to eco-friendly operations",
+  feature1_title: "Global Network", feature1_desc: "Strategic partnerships across 150+ countries for seamless operations",
+  feature2_title: "Compliance Expertise", feature2_desc: "ISO certified with full regulatory compliance in all markets",
+  feature3_title: "Growth Partner", feature3_desc: "Scalable solutions that grow with your business needs",
+  feature4_title: "Dedicated Support", feature4_desc: "24/7 expert assistance from your personal trade specialists",
+  about_cta_title: "Ready to Go Global?",
+  about_cta_subtitle: "Let's discuss how we can help your business expand into new markets with confidence and ease.",
+  about_cta_primary: "Schedule Consultation", about_cta_secondary: "View Services",
+  about_values_title: "Our Core Values", about_values_subtitle: "The principles that guide everything we do",
+  about_journey_title: "Our Journey", about_journey_subtitle: "Key milestones in our growth story",
   services_title: "Our Services", services_subtitle: "Comprehensive import-export solutions designed to streamline your global trade operations",
   products_badge: "PRODUCT CATALOG", products_title: "Premium Import Solutions",
   products_subtitle: "Discover our curated selection of high-quality products from trusted global suppliers",

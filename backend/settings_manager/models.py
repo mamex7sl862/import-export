@@ -35,6 +35,54 @@ class SiteSettings(models.Model):
     about_commitment = models.TextField(default='We\'re committed to transparency, reliability, and building long-term partnerships that drive mutual success.')
     about_founded_text = models.CharField(max_length=200, default='Trusted by Fortune 500 Companies')
     about_founded_sub = models.CharField(max_length=200, default='Delivering excellence in global trade since 2004')
+    about_story_image = models.CharField(max_length=500, default='/global-trade-shipping-containers.jpg')
+
+    # ── About Values ──────────────────────────────────────────────────────────
+    value1_title = models.CharField(max_length=100, default='Customer First')
+    value1_desc = models.TextField(default='Your success is our priority. We tailor solutions to meet your unique needs.')
+    value2_title = models.CharField(max_length=100, default='Integrity')
+    value2_desc = models.TextField(default='Transparent operations and ethical practices in every transaction.')
+    value3_title = models.CharField(max_length=100, default='Innovation')
+    value3_desc = models.TextField(default='Leveraging technology to streamline global trade operations.')
+    value4_title = models.CharField(max_length=100, default='Excellence')
+    value4_desc = models.TextField(default='Committed to delivering exceptional service quality every time.')
+
+    # ── About Milestones ──────────────────────────────────────────────────────
+    milestone1_year = models.CharField(max_length=20, default='2004')
+    milestone1_title = models.CharField(max_length=100, default='Company Founded')
+    milestone1_desc = models.TextField(default='Started with a vision to simplify global trade')
+    milestone2_year = models.CharField(max_length=20, default='2010')
+    milestone2_title = models.CharField(max_length=100, default='Global Expansion')
+    milestone2_desc = models.TextField(default='Extended services to 50+ countries')
+    milestone3_year = models.CharField(max_length=20, default='2015')
+    milestone3_title = models.CharField(max_length=100, default='Technology Integration')
+    milestone3_desc = models.TextField(default='Launched real-time tracking platform')
+    milestone4_year = models.CharField(max_length=20, default='2020')
+    milestone4_title = models.CharField(max_length=100, default='Industry Leader')
+    milestone4_desc = models.TextField(default='Recognized as top logistics provider')
+    milestone5_year = models.CharField(max_length=20, default='2024')
+    milestone5_title = models.CharField(max_length=100, default='Sustainable Future')
+    milestone5_desc = models.TextField(default='Committed to eco-friendly operations')
+
+    # ── About Features (Why Choose Us) ────────────────────────────────────────
+    feature1_title = models.CharField(max_length=100, default='Global Network')
+    feature1_desc = models.TextField(default='Strategic partnerships across 150+ countries for seamless operations')
+    feature2_title = models.CharField(max_length=100, default='Compliance Expertise')
+    feature2_desc = models.TextField(default='ISO certified with full regulatory compliance in all markets')
+    feature3_title = models.CharField(max_length=100, default='Growth Partner')
+    feature3_desc = models.TextField(default='Scalable solutions that grow with your business needs')
+    feature4_title = models.CharField(max_length=100, default='Dedicated Support')
+    feature4_desc = models.TextField(default='24/7 expert assistance from your personal trade specialists')
+
+    # ── About CTA ─────────────────────────────────────────────────────────────
+    about_cta_title = models.CharField(max_length=200, default='Ready to Go Global?')
+    about_cta_subtitle = models.TextField(default="Let's discuss how we can help your business expand into new markets with confidence and ease.")
+    about_cta_primary = models.CharField(max_length=100, default='Schedule Consultation')
+    about_cta_secondary = models.CharField(max_length=100, default='View Services')
+    about_values_title = models.CharField(max_length=200, default='Our Core Values')
+    about_values_subtitle = models.TextField(default='The principles that guide everything we do')
+    about_journey_title = models.CharField(max_length=200, default='Our Journey')
+    about_journey_subtitle = models.TextField(default='Key milestones in our growth story')
 
     # ── Services Section ──────────────────────────────────────────────────────
     services_title = models.CharField(max_length=200, default='Our Services')
