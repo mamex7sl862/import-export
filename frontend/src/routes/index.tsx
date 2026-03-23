@@ -1,7 +1,4 @@
-// Importing Hooks👇🏼
-import { useRoutes } from "react-router-dom";
-
-// Importing pages using lazy render 👇🏼
+import { useRoutes, Navigate } from "react-router-dom";
 import HomePage from "@/pages/client/home/page";
 import MainLayout from "@/pages/client/layouts/main-layout";
 import NotFoundPage from "@/pages/client/not-found";
@@ -16,10 +13,16 @@ import AdminDashboard from "@/pages/admin/dashboard";
 import AdminBlog from "@/pages/admin/blog";
 import AdminContacts from "@/pages/admin/contacts";
 import AdminQuotes from "@/pages/admin/quotes";
-import AdminSiteSettings from "@/pages/admin/site-settings";
 import AdminContent from "@/pages/admin/content";
+import SettingsCompany from "@/pages/admin/settings/company";
+import SettingsHero from "@/pages/admin/settings/hero";
+import SettingsStats from "@/pages/admin/settings/stats";
+import SettingsAbout from "@/pages/admin/settings/about";
+import SettingsServices from "@/pages/admin/settings/services";
+import SettingsQuote from "@/pages/admin/settings/quote";
+import SettingsContact from "@/pages/admin/settings/contact";
+import SettingsSocial from "@/pages/admin/settings/social";
 
-// Config for all routes👇🏼
 const Routes = () => {
   return useRoutes([
     {
@@ -35,7 +38,6 @@ const Routes = () => {
         { path: "*", element: <NotFoundPage /> },
       ],
     },
-    // Admin routes
     { path: "/1", element: <AdminLogin /> },
     {
       path: "/1",
@@ -46,7 +48,16 @@ const Routes = () => {
         { path: "contacts", element: <AdminContacts /> },
         { path: "quotes", element: <AdminQuotes /> },
         { path: "content", element: <AdminContent /> },
-        { path: "settings", element: <AdminSiteSettings /> },
+        // redirect old /1/settings to company page
+        { path: "settings", element: <Navigate to="/1/settings/company" replace /> },
+        { path: "settings/company", element: <SettingsCompany /> },
+        { path: "settings/hero", element: <SettingsHero /> },
+        { path: "settings/stats", element: <SettingsStats /> },
+        { path: "settings/about", element: <SettingsAbout /> },
+        { path: "settings/services", element: <SettingsServices /> },
+        { path: "settings/quote", element: <SettingsQuote /> },
+        { path: "settings/contact", element: <SettingsContact /> },
+        { path: "settings/social", element: <SettingsSocial /> },
       ],
     },
   ]);
