@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'contacts',
     'settings_manager',
     'content',
+    'staff',
 ]
 
 MIDDLEWARE = [

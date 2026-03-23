@@ -13,6 +13,7 @@ import AdminLayout from "@/pages/admin/layout";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminContacts from "@/pages/admin/contacts";
 import AdminQuotes from "@/pages/admin/quotes";
+import AdminUsers from "@/pages/admin/users";
 
 // Unified page admin views
 import HomeAdminPage from "@/pages/admin/pages/home-page";
@@ -51,6 +52,7 @@ const Routes = () => {
         { path: "blog", element: <Navigate to="/1/pages/blog" replace /> },
         { path: "contacts", element: <AdminContacts /> },
         { path: "quotes", element: <AdminQuotes /> },
+        { path: "users", element: <AdminUsers /> },
 
         // Unified page admin routes
         { path: "pages/home", element: <HomeAdminPage /> },

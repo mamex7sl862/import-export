@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import api_root, admin_login
+from .staff_views import staff_users_list, staff_user_detail
 from django.http import JsonResponse
 
 def home_view(request):
@@ -50,6 +51,8 @@ urlpatterns = [
     path('api/quotes/', include('quotes.urls')),
     path('api/contacts/', include('contacts.urls')),
     path('api/admin-panel/login/', admin_login, name='admin-login'),
+    path('api/admin-panel/users/', staff_users_list, name='staff-users-list'),
+    path('api/admin-panel/users/<int:pk>/', staff_user_detail, name='staff-user-detail'),
     path('api/settings/', include('settings_manager.urls')),
     path('api/content/', include('content.urls')),
 ]

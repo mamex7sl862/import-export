@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Globe, Lock, User, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
@@ -10,6 +10,13 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // If already logged in, go straight to dashboard
+  useEffect(() => {
+    if (localStorage.getItem("admin_token")) {
+      navigate("/1/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

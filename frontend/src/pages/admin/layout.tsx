@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import {
   Globe, LayoutDashboard, MessageSquare, ClipboardList,
   LogOut, Menu, X, Building2, Star, Home, Info, Briefcase, Phone,
-  BookOpen, ChevronDown, ChevronRight, Settings, LayoutTemplate,
+  BookOpen, ChevronDown, ChevronRight, Settings, LayoutTemplate, Users,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -11,6 +11,7 @@ const mainNav = [
   { label: "Dashboard", href: "/1/dashboard", icon: LayoutDashboard },
   { label: "Contacts", href: "/1/contacts", icon: MessageSquare },
   { label: "Quotes", href: "/1/quotes", icon: ClipboardList },
+  { label: "Staff Users", href: "/1/users", icon: Users },
 ];
 
 // Each entry = one page in the sidebar, grouping related settings + content
@@ -40,7 +41,7 @@ export default function AdminLayout() {
 
   useEffect(() => {
     const token = localStorage.getItem("admin_token");
-    if (!token) navigate("/1");
+    if (!token) navigate("/1", { replace: true });
   }, [navigate]);
 
   useEffect(() => { if (isPagesActive) setPagesOpen(true); }, [isPagesActive]);
