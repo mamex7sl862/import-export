@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import {
   Globe, LayoutDashboard, FileText, MessageSquare, ClipboardList,
-  LogOut, Menu, X, Layers, Building2, Star, BarChart2, Info,
-  Briefcase, MessageCircle, Phone, Share2, ChevronDown, ChevronRight,
-  BookOpen, Users,
+  LogOut, Menu, X, Building2, Star, Home, Info, Briefcase, Phone,
+  BookOpen, ChevronDown, ChevronRight, Settings,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -13,40 +12,39 @@ const mainNav = [
   { label: "Blog Posts", href: "/1/blog", icon: FileText },
   { label: "Contacts", href: "/1/contacts", icon: MessageSquare },
   { label: "Quotes", href: "/1/quotes", icon: ClipboardList },
-  { label: "Content", href: "/1/content", icon: Layers },
 ];
 
-const settingsNav = [
+// Each entry = one page in the sidebar, grouping related settings + content
+const pageNav = [
+  { label: "Home Page", href: "/1/pages/home", icon: Home },
+  { label: "About Page", href: "/1/pages/about", icon: Info },
+  { label: "Services Page", href: "/1/pages/services", icon: Briefcase },
+  { label: "Contact Page", href: "/1/pages/contact", icon: Phone },
+  { label: "Blog Page", href: "/1/pages/blog", icon: BookOpen },
+];
+
+const globalNav = [
   { label: "Company Info", href: "/1/settings/company", icon: Building2 },
   { label: "Hero Section", href: "/1/settings/hero", icon: Star },
-  { label: "Stats & Numbers", href: "/1/settings/stats", icon: BarChart2 },
-  { label: "About Section", href: "/1/settings/about", icon: Info },
-  { label: "Services & Products", href: "/1/settings/services", icon: Briefcase },
-  { label: "Quote Form", href: "/1/settings/quote", icon: MessageCircle },
-  { label: "Contact Info", href: "/1/settings/contact", icon: Phone },
-  { label: "Social Media", href: "/1/settings/social", icon: Share2 },
-  { label: "About Page Header", href: "/1/settings/page-about", icon: Users },
-  { label: "Services Page Header", href: "/1/settings/page-services", icon: Briefcase },
-  { label: "Contact Page Header", href: "/1/settings/page-contact", icon: Phone },
-  { label: "Blog Page Header", href: "/1/settings/page-blog", icon: BookOpen },
+  { label: "Social Media", href: "/1/settings/social", icon: Globe },
 ];
 
 export default function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isPagesActive = location.pathname.startsWith("/1/pages");
   const isSettingsActive = location.pathname.startsWith("/1/settings");
+  const [pagesOpen, setPagesOpen] = useState(isPagesActive);
   const [settingsOpen, setSettingsOpen] = useState(isSettingsActive);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("admin_token");
     if (!token) navigate("/1");
   }, [navigate]);
 
-  // Auto-open settings group when on a settings page
-  useEffect(() => {
-    if (isSettingsActive) setSettingsOpen(true);
-  }, [isSettingsActive]);
+  useEffect(() => { if (isPagesActive) setPagesOpen(true); }, [isPagesActive]);
+  useEffect(() => { if (isSettingsActive) setSettingsOpen(true); }, [isSettingsActive]);
 
   const handleLogout = () => {
     localStorage.removeItem("admin_token");
@@ -57,28 +55,33 @@ export default function AdminLayout() {
 
   const user = JSON.parse(localStorage.getItem("admin_user") || "{}");
 
-  const NavLink = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => {
+  const NavLink = ({ href, icon: Icon, label, indent = false }: { href: string; icon: any; label: string; indent?: boolean }) => {
     const active = location.pathname === href;
     return (
-      <Link
-        to={href}
-        onClick={() => setSidebarOpen(false)}
-        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+      <Link to={href} onClick={() => setSidebarOpen(false)}
+        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${indent ? "ml-3" : ""} ${
           active ? "bg-[#D4AF37] text-[#101828]" : "text-slate-300 hover:bg-slate-800 hover:text-white"
-        }`}
-      >
+        }`}>
         <Icon className="w-4 h-4 flex-shrink-0" />
         {label}
       </Link>
     );
   };
 
-  const currentLabel =
-    [...mainNav, ...settingsNav].find((n) => n.href === location.pathname)?.label || "Admin Panel";
+  const GroupToggle = ({ label, icon: Icon, open, onToggle, active }: any) => (
+    <button onClick={onToggle}
+      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${active ? "text-[#D4AF37]" : "text-slate-300 hover:bg-slate-800 hover:text-white"}`}>
+      <Icon className="w-4 h-4 flex-shrink-0" />
+      <span className="flex-1 text-left">{label}</span>
+      {open ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+    </button>
+  );
+
+  const allNav = [...mainNav, ...pageNav, ...globalNav];
+  const currentLabel = allNav.find(n => n.href === location.pathname)?.label || "Admin Panel";
 
   return (
     <div className="min-h-screen bg-[#101828] flex">
-      {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-700/50 flex flex-col transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:static lg:inset-auto`}>
         {/* Logo */}
         <div className="flex items-center gap-2 px-6 py-5 border-b border-slate-700/50 flex-shrink-0">
@@ -86,36 +89,30 @@ export default function AdminLayout() {
             <Globe className="w-5 h-5 text-[#101828]" />
           </div>
           <span className="font-bold text-white">TradeFlow Admin</span>
-          <button onClick={() => setSidebarOpen(false)} className="ml-auto lg:hidden text-slate-400">
-            <X className="w-5 h-5" />
-          </button>
+          <button onClick={() => setSidebarOpen(false)} className="ml-auto lg:hidden text-slate-400"><X className="w-5 h-5" /></button>
         </div>
 
         {/* Nav */}
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          {/* Main nav items */}
-          {mainNav.map((item) => (
-            <NavLink key={item.href} {...item} />
-          ))}
+          {/* Main items */}
+          {mainNav.map(item => <NavLink key={item.href} {...item} />)}
 
-          {/* Settings group */}
+          {/* Pages group */}
           <div className="pt-2">
-            <button
-              onClick={() => setSettingsOpen((o) => !o)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                isSettingsActive ? "text-[#D4AF37]" : "text-slate-300 hover:bg-slate-800 hover:text-white"
-              }`}
-            >
-              <Building2 className="w-4 h-4 flex-shrink-0" />
-              <span className="flex-1 text-left">Site Settings</span>
-              {settingsOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-            </button>
+            <GroupToggle label="Pages" icon={Home} open={pagesOpen} onToggle={() => setPagesOpen(o => !o)} active={isPagesActive} />
+            {pagesOpen && (
+              <div className="ml-4 mt-1 space-y-1 border-l border-slate-700/50 pl-3">
+                {pageNav.map(item => <NavLink key={item.href} {...item} />)}
+              </div>
+            )}
+          </div>
 
+          {/* Global Settings group */}
+          <div className="pt-1">
+            <GroupToggle label="Global Settings" icon={Settings} open={settingsOpen} onToggle={() => setSettingsOpen(o => !o)} active={isSettingsActive} />
             {settingsOpen && (
               <div className="ml-4 mt-1 space-y-1 border-l border-slate-700/50 pl-3">
-                {settingsNav.map((item) => (
-                  <NavLink key={item.href} {...item} />
-                ))}
+                {globalNav.map(item => <NavLink key={item.href} {...item} />)}
               </div>
             )}
           </div>
@@ -129,32 +126,22 @@ export default function AdminLayout() {
             </div>
             <span className="text-sm text-white font-medium">{user.username || "Admin"}</span>
           </div>
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-red-500/10 hover:text-red-400 transition-all"
-          >
+          <button onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-red-500/10 hover:text-red-400 transition-all">
             <LogOut className="w-4 h-4" />
             Logout
           </button>
         </div>
       </aside>
 
-      {/* Overlay */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
-      )}
+      {sidebarOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         <header className="bg-slate-900/50 border-b border-slate-700/50 px-6 py-4 flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-slate-400 hover:text-white">
-            <Menu className="w-5 h-5" />
-          </button>
+          <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-slate-400 hover:text-white"><Menu className="w-5 h-5" /></button>
           <h1 className="text-white font-semibold">{currentLabel}</h1>
         </header>
-        <main className="flex-1 p-6 overflow-auto">
-          <Outlet />
-        </main>
+        <main className="flex-1 p-6 overflow-auto"><Outlet /></main>
       </div>
     </div>
   );

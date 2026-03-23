@@ -7,25 +7,25 @@ import ServicesPage from "@/pages/client/services/page";
 import ContactPage from "@/pages/client/contact/page";
 import BlogPage from "@/pages/client/blog/page";
 import BlogDetailPage from "@/pages/client/blog/detail";
+
 import AdminLogin from "@/pages/admin/login";
 import AdminLayout from "@/pages/admin/layout";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminBlog from "@/pages/admin/blog";
 import AdminContacts from "@/pages/admin/contacts";
 import AdminQuotes from "@/pages/admin/quotes";
-import AdminContent from "@/pages/admin/content";
+
+// Unified page admin views
+import HomeAdminPage from "@/pages/admin/pages/home-page";
+import AboutAdminPage from "@/pages/admin/pages/about-page";
+import ServicesAdminPage from "@/pages/admin/pages/services-page";
+import ContactAdminPage from "@/pages/admin/pages/contact-page";
+import BlogAdminPage from "@/pages/admin/pages/blog-page";
+
+// Global settings
 import SettingsCompany from "@/pages/admin/settings/company";
 import SettingsHero from "@/pages/admin/settings/hero";
-import SettingsStats from "@/pages/admin/settings/stats";
-import SettingsAbout from "@/pages/admin/settings/about";
-import SettingsServices from "@/pages/admin/settings/services";
-import SettingsQuote from "@/pages/admin/settings/quote";
-import SettingsContact from "@/pages/admin/settings/contact";
 import SettingsSocial from "@/pages/admin/settings/social";
-import SettingsPageAbout from "@/pages/admin/settings/page-about";
-import SettingsPageServices from "@/pages/admin/settings/page-services";
-import SettingsPageContact from "@/pages/admin/settings/page-contact";
-import SettingsPageBlog from "@/pages/admin/settings/page-blog";
 
 const Routes = () => {
   return useRoutes([
@@ -51,21 +51,22 @@ const Routes = () => {
         { path: "blog", element: <AdminBlog /> },
         { path: "contacts", element: <AdminContacts /> },
         { path: "quotes", element: <AdminQuotes /> },
-        { path: "content", element: <AdminContent /> },
-        // redirect old /1/settings to company page
-        { path: "settings", element: <Navigate to="/1/settings/company" replace /> },
+
+        // Unified page admin routes
+        { path: "pages/home", element: <HomeAdminPage /> },
+        { path: "pages/about", element: <AboutAdminPage /> },
+        { path: "pages/services", element: <ServicesAdminPage /> },
+        { path: "pages/contact", element: <ContactAdminPage /> },
+        { path: "pages/blog", element: <BlogAdminPage /> },
+
+        // Global settings
         { path: "settings/company", element: <SettingsCompany /> },
         { path: "settings/hero", element: <SettingsHero /> },
-        { path: "settings/stats", element: <SettingsStats /> },
-        { path: "settings/about", element: <SettingsAbout /> },
-        { path: "settings/services", element: <SettingsServices /> },
-        { path: "settings/quote", element: <SettingsQuote /> },
-        { path: "settings/contact", element: <SettingsContact /> },
         { path: "settings/social", element: <SettingsSocial /> },
-        { path: "settings/page-about", element: <SettingsPageAbout /> },
-        { path: "settings/page-services", element: <SettingsPageServices /> },
-        { path: "settings/page-contact", element: <SettingsPageContact /> },
-        { path: "settings/page-blog", element: <SettingsPageBlog /> },
+
+        // Legacy redirects
+        { path: "content", element: <Navigate to="/1/pages/services" replace /> },
+        { path: "settings", element: <Navigate to="/1/settings/company" replace /> },
       ],
     },
   ]);
