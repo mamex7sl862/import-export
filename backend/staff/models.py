@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 ROLE_CHOICES = [
-    ("import_staff", "Import Staff"),
-    ("export_staff", "Export Staff"),
+    ("import_staff",   "Import Staff"),
+    ("export_staff",   "Export Staff"),
     ("import_manager", "Import Manager"),
     ("export_manager", "Export Manager"),
 ]
@@ -14,8 +14,8 @@ class StaffProfile(models.Model):
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default="import_staff")
 
     class Meta:
-        verbose_name = "Staff Profile"
-        verbose_name_plural = "Staff Profiles"
+        verbose_name = "Employee Profile"
+        verbose_name_plural = "Employee Profiles"
 
     def __str__(self):
         return f"{self.user.username} — {self.get_role_display()}"
