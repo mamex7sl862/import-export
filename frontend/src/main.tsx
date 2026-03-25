@@ -8,16 +8,19 @@ import TanstackQueryProvider from "./providers/tanstack-query-provider.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/index.ts";
 import { BrowserRouter } from "react-router-dom";
+import { LanguageProvider } from "@/providers/language-provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <TanstackQueryProvider>
         <ThemeProvider defaultTheme="dark" storageKey="tradeflow-theme">
-          <Provider store={store}>
-            <App />
-            <Toaster />
-          </Provider>
+          <LanguageProvider>
+            <Provider store={store}>
+              <App />
+              <Toaster />
+            </Provider>
+          </LanguageProvider>
         </ThemeProvider>
       </TanstackQueryProvider>
     </BrowserRouter>

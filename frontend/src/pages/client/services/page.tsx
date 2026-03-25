@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronRight, Clock, Shield, Globe2, HeadphonesIcon } from "lucide-react";
 import PageHeader from "./header";
-import { api } from "@/hooks/api";
+import { publicApi } from "@/hooks/api";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import * as Icons from "lucide-react";
 
@@ -32,8 +32,8 @@ export default function ImportExportServices() {
   const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
-    api.get("/api/content/products/").then(r => setProducts(r.data.results || r.data)).catch(() => {});
-    api.get("/api/content/services/").then(r => setServices(r.data.results || r.data)).catch(() => {});
+    publicApi.get("/api/content/products/").then(r => setProducts(r.data.results || r.data)).catch(() => {});
+    publicApi.get("/api/content/services/").then(r => setServices(r.data.results || r.data)).catch(() => {});
   }, []);
 
   const filteredProducts = useMemo(() => {

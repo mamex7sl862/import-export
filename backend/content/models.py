@@ -31,6 +31,16 @@ class Product(models.Model):
     reviews = models.PositiveIntegerField(default=0)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    # Workflow fields
+    is_published = models.BooleanField(default=False, help_text='Published by manager — visible on frontend')
+    submitted_by = models.ForeignKey(
+        'auth.User', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='submitted_products'
+    )
+    published_by = models.ForeignKey(
+        'auth.User', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='published_products'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

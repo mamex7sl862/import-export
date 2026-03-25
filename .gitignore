@@ -15,6 +15,7 @@ frontend/build/
 
 # Backend (Django/Python)
 backend/venv/
+backend/venv_new/
 backend/venv_old/
 backend/__pycache__/
 backend/*.pyc

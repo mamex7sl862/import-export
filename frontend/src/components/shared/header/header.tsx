@@ -5,18 +5,20 @@ import MobileMenu from "./mobile-menu";
 import { Link, useNavigate } from "react-router-dom";
 import TopBar from "./top-bar";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { settings } = useSiteSettings();
+  const { t, toggleLanguage, language } = useLanguage();
 
   const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact us", href: "/contact" },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.services"), href: "/services" },
+    { label: t("nav.blog"), href: "/blog" },
+    { label: t("nav.contact"), href: "/contact" },
   ];
 
   return (
@@ -52,16 +54,22 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
-            {/* <ModeToggle /> */}
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-transparent text-[#D4AF37] text-[12px] font-semibold transition-all hover:bg-[#D4AF37]/10"
+              aria-label="Toggle language"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {t("lang.toggle")}
+            </button>
 
             <Button
               className="hidden md:flex bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-semibold px-4 py-1.5 h-8 text-[13px]"
-              onClick={() => {
-                navigate("/contact");
-              }}
+              onClick={() => navigate("/contact")}
               aria-label="Contact us"
             >
-              Contact Us
+              {t("nav.contactBtn")}
             </Button>
 
             {/* Mobile Menu Toggle */}
@@ -85,6 +93,8 @@ export default function Header() {
         <MobileMenu
           navLinks={navLinks}
           onClose={() => setMobileMenuOpen(false)}
+          toggleLanguage={toggleLanguage}
+          langLabel={t("lang.toggle")}
         />
       )}
     </>

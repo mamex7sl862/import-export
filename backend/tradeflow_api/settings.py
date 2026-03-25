@@ -18,9 +18,9 @@ DEBUG = config('DEBUG', default='False') == 'True'
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
-# Add Railway and Vercel domains
-if os.environ.get('RAILWAY_ENVIRONMENT'):
-    ALLOWED_HOSTS.append('.railway.app')
+# Add Render and Vercel domains automatically
+if os.environ.get('RENDER'):
+    ALLOWED_HOSTS.append('.onrender.com')
 if os.environ.get('VERCEL'):
     ALLOWED_HOSTS.append('.vercel.app')
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     
     # Third party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
     
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'settings_manager',
     'content',
     'staff',
+    'chatbot',
 ]
 
 MIDDLEWARE = [
@@ -88,32 +90,16 @@ WSGI_APPLICATION = 'tradeflow_api.wsgi.application'
 
 
 # Database
-# Use DATABASE_URL (production/Render) > MYSQL_HOST (local MySQL) > SQLite fallback
+# Uses DATABASE_URL env var (Render Postgres) — falls back to SQLite for local dev
 _database_url = config('DATABASE_URL', default='')
-_mysql_host = config('MYSQL_HOST', default='')
 
 if _database_url:
     DATABASES = {
         'default': dj_database_url.config(
             default=_database_url,
             conn_max_age=600,
+            ssl_require=not DEBUG,
         )
-    }
-elif _mysql_host:
-    _mysql_options = {'charset': 'utf8mb4'}
-    # Only require SSL in production (not local dev)
-    if not DEBUG:
-        _mysql_options['ssl'] = {'ssl-mode': 'REQUIRED'}
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': config('MYSQL_DATABASE', default='tradeflow'),
-            'USER': config('MYSQL_USER', default='root'),
-            'PASSWORD': config('MYSQL_PASSWORD', default=''),
-            'HOST': _mysql_host,
-            'PORT': config('MYSQL_PORT', default='3306'),
-            'OPTIONS': _mysql_options,
-        }
     }
 else:
     DATABASES = {
@@ -173,14 +159,14 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:5173,http://localhost:5174,http://localhost:3000'
 ).split(',')
 
-# Always include the Vercel frontend
+# Always include known deployment origins
 CORS_ALLOWED_ORIGINS += [
-    'https://tradeflow-import-export.vercel.app',
+    'https://tradeflow-import-export-2.onrender.com',
 ]
 
 # Add any extra frontend URL from env
 _frontend_url = config('FRONTEND_URL', default='')
-if _frontend_url:
+if _frontend_url and _frontend_url not in CORS_ALLOWED_ORIGINS:
     CORS_ALLOWED_ORIGINS.append(_frontend_url)
 
 CORS_ALLOW_CREDENTIALS = True
@@ -212,5 +198,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }

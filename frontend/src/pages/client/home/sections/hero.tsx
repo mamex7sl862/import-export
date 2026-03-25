@@ -3,10 +3,12 @@ import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 export default function HeroSection() {
   const navigate = useNavigate();
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
 
   const scrollToQuoteForm = () => {
     const quoteSection = document.getElementById('quote-form');
@@ -62,7 +64,7 @@ export default function HeroSection() {
                   className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#101828] font-bold text-base h-12 px-8 rounded-xl shadow-2xl hover:shadow-[#D4AF37]/25 transition-all duration-300 transform hover:scale-105"
                   onClick={scrollToQuoteForm}
                 >
-                  {settings.hero_cta_primary}
+                  {t("hero.cta_primary")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 
@@ -73,7 +75,7 @@ export default function HeroSection() {
                   onClick={() => navigate("/services")}
                 >
                   <Play className="mr-2 h-4 w-4" />
-                  {settings.hero_cta_secondary}
+                  {t("hero.cta_secondary")}
                 </Button>
               </div>
 

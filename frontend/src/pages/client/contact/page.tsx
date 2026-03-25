@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,11 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import PageHeader from "./header";
 import { api } from "@/hooks/api";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -134,91 +134,35 @@ export default function ContactPage() {
           {/* Contact Form Section */}
           <div className="lg:col-span-2">
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-8">
-              <h2 className="text-2xl font-bold mb-2 text-white">Send us a Message</h2>
+              <h2 className="text-2xl font-bold mb-2 text-white">{t("contact.title")}</h2>
               <p className="text-slate-300 mb-8">
-                Fill out the form below and we'll respond promptly.
+                {t("contact.badge")}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2 text-white"
-                    >
-                      Full Name
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="John Doe"
-                      className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400"
-                    />
+                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-white">{t("contact.name")}</label>
+                    <Input id="name" name="name" required placeholder="John Doe" className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400" />
                   </div>
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2 text-white"
-                    >
-                      Email Address
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="john@company.com"
-                      className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400"
-                    />
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-white">{t("contact.email")}</label>
+                    <Input id="email" name="email" type="email" required placeholder="john@company.com" className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400" />
                   </div>
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label
-                      htmlFor="company"
-                      className="block text-sm font-medium mb-2 text-white"
-                    >
-                      Company Name
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      placeholder="Your Company"
-                      className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400"
-                    />
+                    <label htmlFor="company" className="block text-sm font-medium mb-2 text-white">{t("contact.company")}</label>
+                    <Input id="company" name="company" placeholder="Your Company" className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400" />
                   </div>
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium mb-2 text-white"
-                    >
-                      Phone Number
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="+1 (234) 567-890"
-                      className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400"
-                    />
+                    <label htmlFor="phone" className="block text-sm font-medium mb-2 text-white">{t("contact.phone")}</label>
+                    <Input id="phone" name="phone" type="tel" placeholder="+1 (234) 567-890" className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400" />
                   </div>
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="service"
-                    className="block text-sm font-medium mb-2 text-white"
-                  >
-                    Subject
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    required
-                    className="w-full px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                  >
+                  <label htmlFor="service" className="block text-sm font-medium mb-2 text-white">{t("contact.subject")}</label>
+                  <select id="service" name="service" required className="w-full px-3 py-2 bg-slate-900/50 border border-slate-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]">
                     <option value="">Select a subject</option>
                     <option value="general">General Inquiry</option>
                     <option value="quote">Request a Quote</option>
@@ -228,22 +172,9 @@ export default function ContactPage() {
                     <option value="other">Other</option>
                   </select>
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2 text-white"
-                  >
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    placeholder="Tell us about your requirements..."
-                    rows={5}
-                    className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400 resize-none"
-                  />
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-white">{t("contact.message")}</label>
+                  <Textarea id="message" name="message" required placeholder="Tell us about your requirements..." rows={5} className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-400 resize-none" />
                 </div>
 
                 {formStatus === "success" && (
@@ -275,7 +206,7 @@ export default function ContactPage() {
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      Send Message
+                      {t("contact.send")}
                     </>
                   )}
                 </Button>

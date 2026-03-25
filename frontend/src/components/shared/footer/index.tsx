@@ -3,9 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 export default function Footer() {
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
   return (
     <>
@@ -18,14 +20,14 @@ export default function Footer() {
         </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">Stay Ahead in Global Trade</h3>
+          <h3 className="text-3xl md:text-4xl font-bold mb-4">{t("footer.newsletter_title")}</h3>
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter for industry insights, market trends, and exclusive logistics updates.
+            {t("footer.newsletter_sub")}
           </p>
           <form className="flex gap-3 flex-col sm:flex-row max-w-xl mx-auto">
             <Input
               type="email"
-              placeholder="Enter your email address"
+              placeholder={t("footer.newsletter_placeholder")}
               className="h-12 bg-slate-900/50 text-white placeholder:text-slate-400 border-slate-700 flex-1"
               aria-label="Email address for newsletter"
             />
@@ -33,7 +35,7 @@ export default function Footer() {
               className="h-12 px-8 bg-[#d4af37] hover:bg-[#c19d2f] text-[#101828] font-semibold min-w-[44px] min-h-[44px]"
               aria-label="Subscribe to newsletter"
             >
-              Subscribe
+              {t("footer.subscribe")}
               <Send className="ml-2 h-4 w-4" />
             </Button>
           </form>
@@ -69,101 +71,31 @@ export default function Footer() {
 
             {/* Services */}
             <div>
-              <h4 className="font-bold mb-6 text-white text-lg">Services</h4>
+              <h4 className="font-bold mb-6 text-white text-lg">{t("footer.services")}</h4>
               <ul className="space-y-3 text-sm">
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Ocean Freight
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Air Freight
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Customs Brokerage
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Warehousing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Supply Chain
-                  </Link>
-                </li>
+                <li><Link to="/services" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.svc_ocean")}</Link></li>
+                <li><Link to="/services" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.svc_air")}</Link></li>
+                <li><Link to="/services" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.svc_customs")}</Link></li>
+                <li><Link to="/services" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.svc_warehouse")}</Link></li>
+                <li><Link to="/services" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.svc_supply")}</Link></li>
               </ul>
             </div>
 
             {/* Company */}
             <div>
-              <h4 className="font-bold mb-6 text-white text-lg">Company</h4>
+              <h4 className="font-bold mb-6 text-white text-lg">{t("footer.company")}</h4>
               <ul className="space-y-3 text-sm">
-                <li>
-                  <Link
-                    to="/about"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/blog"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Blog & News
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
-                  >
-                    Partners
-                  </Link>
-                </li>
+                <li><Link to="/about" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.about")}</Link></li>
+                <li><Link to="/blog" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.blog")}</Link></li>
+                <li><Link to="/contact" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.contact_us")}</Link></li>
+                <li><Link to="#" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.careers")}</Link></li>
+                <li><Link to="#" className="text-slate-300 hover:text-[#d4af37] transition-colors">{t("footer.partners")}</Link></li>
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Contact section heading */}
             <div>
-              <h4 className="font-bold mb-6 text-white text-lg">Contact</h4>
+              <h4 className="font-bold mb-6 text-white text-lg">{t("footer.contact")}</h4>
               <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3">
                   <Mail className="h-5 w-5 text-[#d4af37] mt-0.5 flex-shrink-0" />
@@ -184,7 +116,7 @@ export default function Footer() {
           {/* Divider */}
           <div className="border-t border-slate-700/50 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400">
-              <p>&copy; {year} {settings.company_name}. All rights reserved.</p>
+              <p>&copy; {year} {settings.company_name}. {t("footer.rights")}</p>
               <p className="text-base font-bold">
                 Created by{" "}
                 <a

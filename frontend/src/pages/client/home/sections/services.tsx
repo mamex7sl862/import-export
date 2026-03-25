@@ -1,9 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Package, Truck, FileText, BarChart3, Shield, Globe, Anchor, Plane, Ship } from "lucide-react"
 import { useSiteSettings } from "@/hooks/useSiteSettings"
+import { useLanguage } from "@/providers/language-provider"
 
 export default function Services() {
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
   const services = [
     {
       icon: Ship,
@@ -57,9 +59,9 @@ export default function Services() {
       
       <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
         <div className="mb-16 text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-[#d4af37] mb-3">{settings.services_title}</p>
+          <p className="text-sm font-bold uppercase tracking-wider text-[#d4af37] mb-3">{t("services.title")}</p>
           <h2 className="text-balance text-4xl font-bold text-white md:text-5xl mb-4">
-            End-to-End Logistics Solutions
+            {t("services.subtitle")}
           </h2>
           <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
             {settings.services_subtitle}

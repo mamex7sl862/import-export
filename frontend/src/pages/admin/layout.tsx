@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate, Link, useLocation, Navigate } from "react-router-dom";
+import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import {
   Globe, LayoutDashboard, MessageSquare, ClipboardList,
   LogOut, Menu, X, Building2, Star, Home, Info, Briefcase, Phone,
-  BookOpen, ChevronDown, ChevronRight, Settings, LayoutTemplate, UserCog,
-  ShieldAlert,
+  BookOpen, ChevronDown, ChevronRight, Settings, LayoutTemplate,
+  ShieldAlert, Package, HelpCircle, MessageCircle, UsersRound,
 } from "lucide-react";
 import { toast } from "sonner";
-import { getAuthUser, canAccess, isManager, isSuperAdmin, type AuthUser } from "@/hooks/useAuth";
+import { getAuthUser, canAccess, type AuthUser } from "@/hooks/useAuth";
 
 // ── Role badge ────────────────────────────────────────────────────────────────
 const ROLE_LABELS: Record<string, { label: string; color: string }> = {
@@ -20,10 +20,11 @@ const ROLE_LABELS: Record<string, { label: string; color: string }> = {
 
 // ── Nav definitions ───────────────────────────────────────────────────────────
 const mainNav = [
-  { label: "Dashboard",  href: "/1/dashboard", icon: LayoutDashboard, section: "dashboard" },
-  { label: "Contacts",   href: "/1/contacts",  icon: MessageSquare,   section: "contacts"  },
-  { label: "Quotes",     href: "/1/quotes",    icon: ClipboardList,   section: "quotes"    },
-  { label: "Employees",  href: "/1/employees", icon: UserCog,         section: "employees" },
+  { label: "Dashboard",        href: "/1/dashboard",        icon: LayoutDashboard, section: "dashboard"        },
+  { label: "Contacts",         href: "/1/contacts",         icon: MessageSquare,   section: "contacts"         },
+  { label: "Quotes",           href: "/1/quotes",           icon: ClipboardList,   section: "quotes"           },
+  { label: "Products",         href: "/1/products",         icon: Package,         section: "products"         },
+  { label: "User Management",  href: "/1/user-management",  icon: UsersRound,      section: "employees"        },
 ];
 
 const pageNav = [
@@ -36,9 +37,11 @@ const pageNav = [
 ];
 
 const globalNav = [
-  { label: "Company Info", href: "/1/settings/company", icon: Building2, section: "settings" },
-  { label: "Hero Section", href: "/1/settings/hero",    icon: Star,      section: "settings" },
-  { label: "Social Media", href: "/1/settings/social",  icon: Globe,     section: "settings" },
+  { label: "Company Info",  href: "/1/settings/company",      icon: Building2,     section: "settings" },
+  { label: "Hero Section",  href: "/1/settings/hero",         icon: Star,          section: "settings" },
+  { label: "Social Media",  href: "/1/settings/social",       icon: Globe,         section: "settings" },
+  { label: "FAQs",          href: "/1/settings/faqs",         icon: HelpCircle,    section: "settings" },
+  { label: "Testimonials",  href: "/1/settings/testimonials", icon: MessageCircle, section: "settings" },
 ];
 
 // ── Unauthorized page ─────────────────────────────────────────────────────────

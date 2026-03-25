@@ -42,7 +42,7 @@ from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import secrets
+from rest_framework.authtoken.models import Token
 try:
     from staff.models import StaffProfile as _SP
 except Exception:
@@ -58,7 +58,7 @@ def admin_login(request):
     user = authenticate(username=username, password=password)
 
     if user and user.is_active and (user.is_staff or user.is_superuser):
-        token = secrets.token_hex(32)
+        token, _ = Token.objects.get_or_create(user=user)
 
         # Determine role
         role = "superadmin"
@@ -69,7 +69,7 @@ def admin_login(request):
                 role = "import_staff"
 
         return Response({
-            'token': token,
+            'token': token.key,
             'user': {
                 'id': user.id,
                 'username': user.username,

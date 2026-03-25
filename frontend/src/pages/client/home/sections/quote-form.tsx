@@ -15,9 +15,11 @@ import { MapPin, Package, Mail, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/hooks/api";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 export default function QuoteForm() {
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     origin: "",
     destination: "",
@@ -159,14 +161,14 @@ export default function QuoteForm() {
           {/* Right Side - Form */}
           <Card className="border-2 border-slate-700/50 shadow-2xl bg-slate-800/50 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl text-white">Quote Request Form</CardTitle>
-              <CardDescription className="text-slate-300">Fill in your shipment details below</CardDescription>
+              <CardTitle className="text-2xl text-white">{t("quote.form_title")}</CardTitle>
+              <CardDescription className="text-slate-300">{t("quote.form_sub")}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="origin" className="text-slate-200">Origin Country *</Label>
+                    <Label htmlFor="origin" className="text-slate-200">{t("quote.origin")} *</Label>
                     <Input
                       id="origin"
                       placeholder="e.g., United States"
@@ -178,7 +180,7 @@ export default function QuoteForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="destination" className="text-slate-200">Destination Country *</Label>
+                    <Label htmlFor="destination" className="text-slate-200">{t("quote.destination")} *</Label>
                     <Input
                       id="destination"
                       placeholder="e.g., Germany"
@@ -191,28 +193,28 @@ export default function QuoteForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="cargoType" className="text-slate-200">Cargo Type *</Label>
+                  <Label htmlFor="cargoType" className="text-slate-200">{t("quote.cargo")} *</Label>
                   <Select
                     value={formData.cargoType}
                     onValueChange={(value) => setFormData({ ...formData, cargoType: value })}
                     required
                   >
                     <SelectTrigger id="cargoType" className="h-11 bg-slate-700/50 border-slate-600 text-white">
-                      <SelectValue placeholder="Select cargo type" />
+                      <SelectValue placeholder={t("quote.cargo_placeholder")} />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-800 border-slate-600">
-                      <SelectItem value="general" className="text-white hover:bg-slate-700">General Cargo</SelectItem>
-                      <SelectItem value="perishable" className="text-white hover:bg-slate-700">Perishable Goods</SelectItem>
-                      <SelectItem value="hazardous" className="text-white hover:bg-slate-700">Hazardous Materials</SelectItem>
-                      <SelectItem value="oversized" className="text-white hover:bg-slate-700">Oversized Freight</SelectItem>
-                      <SelectItem value="electronics" className="text-white hover:bg-slate-700">Electronics</SelectItem>
-                      <SelectItem value="other" className="text-white hover:bg-slate-700">Other</SelectItem>
+                      <SelectItem value="general" className="text-white hover:bg-slate-700">{t("quote.cargo_general")}</SelectItem>
+                      <SelectItem value="perishable" className="text-white hover:bg-slate-700">{t("quote.cargo_perishable")}</SelectItem>
+                      <SelectItem value="hazardous" className="text-white hover:bg-slate-700">{t("quote.cargo_hazardous")}</SelectItem>
+                      <SelectItem value="oversized" className="text-white hover:bg-slate-700">{t("quote.cargo_oversized")}</SelectItem>
+                      <SelectItem value="electronics" className="text-white hover:bg-slate-700">{t("quote.cargo_electronics")}</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-slate-700">{t("quote.cargo_other")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="weight" className="text-slate-200">Approximate Weight (kg) *</Label>
+                  <Label htmlFor="weight" className="text-slate-200">{t("quote.weight")} *</Label>
                   <Input
                     id="weight"
                     type="number"
@@ -226,7 +228,7 @@ export default function QuoteForm() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-slate-200">Email Address *</Label>
+                    <Label htmlFor="email" className="text-slate-200">{t("quote.email")} *</Label>
                     <Input
                       id="email"
                       type="email"
@@ -239,7 +241,7 @@ export default function QuoteForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-slate-200">Phone Number *</Label>
+                    <Label htmlFor="phone" className="text-slate-200">{t("quote.phone")} *</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -253,10 +255,10 @@ export default function QuoteForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="company" className="text-slate-200">Company Name</Label>
+                  <Label htmlFor="company" className="text-slate-200">{t("quote.company")}</Label>
                   <Input
                     id="company"
-                    placeholder="Your Company (optional)"
+                    placeholder={t("quote.company_placeholder")}
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     className="h-11 bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
@@ -264,10 +266,10 @@ export default function QuoteForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="additionalInfo" className="text-slate-200">Additional Information</Label>
+                  <Label htmlFor="additionalInfo" className="text-slate-200">{t("quote.info")}</Label>
                   <Textarea
                     id="additionalInfo"
-                    placeholder="Any special requirements or additional details..."
+                    placeholder={t("quote.info_placeholder")}
                     value={formData.additionalInfo}
                     onChange={(e) => setFormData({ ...formData, additionalInfo: e.target.value })}
                     rows={4}
@@ -284,10 +286,10 @@ export default function QuoteForm() {
                   {isSubmitting ? (
                     <>
                       <span className="w-4 h-4 border-2 border-[#101828] border-t-transparent rounded-full animate-spin mr-2" />
-                      Submitting...
+                      {t("quote.submitting")}
                     </>
                   ) : (
-                    'Request Quote'
+                    t("quote.submit")
                   )}
                 </Button>
               </form>

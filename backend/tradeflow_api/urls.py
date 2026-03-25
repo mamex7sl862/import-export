@@ -55,4 +55,5 @@ urlpatterns = [
     path('api/admin-panel/users/<int:pk>/', staff_user_detail, name='staff-user-detail'),
     path('api/settings/', include('settings_manager.urls')),
     path('api/content/', include('content.urls')),
+    path('chatbot', include('chatbot.urls')),
 ]

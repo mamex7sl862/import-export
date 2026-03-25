@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
 import { AnimatedCounter } from "@/components/animated-counter";
+import { useLanguage } from "@/providers/language-provider";
 
 interface Stat {
   value: number;
@@ -10,16 +10,14 @@ interface Stat {
 }
 
 export const StatsContainer = () => {
-  const { ref, inView } = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+  const { t } = useLanguage();
 
   const stats: Stat[] = [
-    { value: 50, label: "Countries Served", suffix: "+" },
-    { value: 10000, label: "Shipments Processed", suffix: "+" },
-    { value: 500, label: "Active Partners", suffix: "+" },
-    { value: 25, label: "Years Experience", suffix: "+" },
+    { value: 50, label: t("stats.countries"), suffix: "+" },
+    { value: 10000, label: t("stats.shipments"), suffix: "+" },
+    { value: 500, label: t("stats.partners"), suffix: "+" },
+    { value: 25, label: t("stats.years"), suffix: "+" },
   ];
 
   const containerVariants = {

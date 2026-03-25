@@ -3,19 +3,21 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { api } from "@/hooks/api";
+import { publicApi } from "@/hooks/api";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useLanguage } from "@/providers/language-provider";
 
 interface Product { id: number; name: string; description: string; image: string; category: string; type: string; price: string; rating: number; reviews: number }
 
 export default function Products() {
   const navigate = useNavigate();
   const { settings } = useSiteSettings();
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    api.get("/api/content/products/?category=import")
-      .then(r => setProducts((r.data.results || r.data).slice(0, 3)))
+    publicApi.get("/api/content/products/")
+      .then(r => setProducts((r.data.results || r.data).slice(0, 6)))
       .catch(() => {})
   }, [])
 
@@ -31,24 +33,33 @@ export default function Products() {
       </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 relative">
         <div className="mb-16 text-center">
-          <p className="text-sm font-bold uppercase tracking-wider text-[#D4AF37] mb-4">{settings.products_badge}</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{settings.products_title}</h2>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto">{settings.products_subtitle}</p>
+          <p className="text-sm font-bold uppercase tracking-wider text-[#D4AF37] mb-4">{t("products.badge")}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t("products.title")}</h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">{t("products.subtitle")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => <ProductCard key={product.id} product={product} />)}
+          {products.map((product) => <ProductCard key={product.id} product={product} t={t} />)}
         </div>
       </div>
       <div className="w-full py-8 flex justify-center items-center relative">
         <Button variant="outline" className="bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#101828] font-semibold px-8 py-3 rounded-xl transition-all duration-300" onClick={() => navigate("/services")}>
-          View All Products & Services
+          {t("general.viewAll")}
         </Button>
       </div>
     </section>
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, t }: { product: Product; t: (k: string) => string }) {
+  const scrollToQuote = () => {
+    const el = document.getElementById("quote-form");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.href = "/#quote-form";
+    }
+  };
+
   return (
     <Card className="pt-0 overflow-hidden hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-2xl cursor-pointer group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50">
       <div className="relative w-full h-48 overflow-hidden bg-slate-700">
@@ -69,8 +80,11 @@ function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="flex items-center justify-between pt-4 border-t border-slate-700/50">
           {product.price && <span className="text-sm font-bold text-[#D4AF37]">{product.price}</span>}
-          <button className="inline-flex items-center gap-1 text-sm font-semibold text-slate-300 hover:text-[#D4AF37] transition-colors">
-            View Details <ChevronRight className="w-4 h-4" />
+          <button
+            onClick={scrollToQuote}
+            className="inline-flex items-center gap-1 text-sm font-semibold text-slate-300 hover:text-[#D4AF37] transition-colors"
+          >
+            {t("products.quote")} <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </CardContent>
