@@ -104,6 +104,9 @@ class ProductViewSet(viewsets.ModelViewSet):
         user = request.user
         role = get_user_role(user)
 
+        if not user.is_authenticated:
+            return Response({'error': 'Authentication required.'}, status=401)
+
         # Staff can only create in their category
         if role == 'import_staff' and request.data.get('category') == 'export':
             return Response({'error': 'Import staff can only add import products.'}, status=403)

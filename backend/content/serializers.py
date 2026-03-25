@@ -15,7 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        read_only_fields = ['submitted_by', 'published_by']
+        read_only_fields = ['submitted_by', 'published_by', 'submitted_by_username', 'published_by_username']
 
     def get_submitted_by_username(self, obj):
         return obj.submitted_by.username if obj.submitted_by else None
