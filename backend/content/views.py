@@ -119,7 +119,13 @@ class ProductViewSet(viewsets.ModelViewSet):
         if role == 'export_manager' and request.data.get('category') == 'import':
             return Response({'error': 'Export managers can only manage export products.'}, status=403)
 
-        return super().create(request, *args, **kwargs)
+        serializer = self.get_serializer(data=request.data)
+        if not serializer.is_valid():
+            print("PRODUCT CREATE VALIDATION ERROR:", serializer.errors)
+            return Response(serializer.errors, status=400)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def update(self, request, *args, **kwargs):
         user = request.user
