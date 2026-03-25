@@ -54,4 +54,6 @@ def chatbot_view(request):
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON"}, status=400)
     except Exception as e:
+        import traceback
+        print("CHATBOT ERROR:", traceback.format_exc())
         return JsonResponse({"error": str(e)}, status=500)
