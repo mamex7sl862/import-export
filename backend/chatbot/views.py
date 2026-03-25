@@ -30,6 +30,9 @@ def chatbot_view(request):
         if not user_message:
             return JsonResponse({"error": "Message is required"}, status=400)
 
+        if not GROQ_API_KEY:
+            return JsonResponse({"reply": "Chatbot is temporarily unavailable. Please contact us directly."}, status=200)
+
         client = Groq(api_key=GROQ_API_KEY)
 
         messages = [{"role": "system", "content": SYSTEM_PROMPT}]
