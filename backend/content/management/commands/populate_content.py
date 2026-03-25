@@ -47,7 +47,7 @@ class Command(BaseCommand):
             {'name': 'Tropical Fruits', 'description': 'Mangoes, pineapples, and tropical fruits shipped fresh', 'image': '/asia-trade-ports-business.jpg', 'category': 'export', 'type': 'Agriculture', 'price': 'Starting from $5,000', 'rating': 4.7, 'reviews': 234, 'order': 12},
         ]
         for p in products:
-            Product.objects.create(**p)
+            Product.objects.create(**p, is_published=True, is_active=True)
         self.stdout.write(f'Created {len(products)} products.')
 
     def _faqs(self):
