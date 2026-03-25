@@ -159,9 +159,9 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:5173,http://localhost:5174,http://localhost:3000'
 ).split(',')
 
-# Always include known deployment origins
-CORS_ALLOWED_ORIGINS += [
-    'https://tradeflow-import-export-2.onrender.com',
+# Allow all Vercel preview deployments
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
 ]
 
 # Add any extra frontend URL from env
@@ -181,13 +181,14 @@ CORS_ALLOW_HEADERS = [
 
 # CSRF Settings
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
+CSRF_TRUSTED_ORIGINS.append('https://*.vercel.app')
 
 # Add https versions for production
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = [
+    CSRF_TRUSTED_ORIGINS = list(set([
         origin.replace('http://', 'https://') if origin.startswith('http://') else origin
         for origin in CSRF_TRUSTED_ORIGINS
-    ]
+    ]))
 
 # REST Framework Settings
 REST_FRAMEWORK = {
