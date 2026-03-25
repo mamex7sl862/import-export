@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from groq import Groq
 
-GROQ_API_KEY = "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"
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 SYSTEM_PROMPT = """You are a helpful assistant for TradeFlow, a professional import and export company based in Addis Ababa, Ethiopia.
 
